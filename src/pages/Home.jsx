@@ -6,68 +6,67 @@ import { Shield, Zap, Globe, Lock, Smartphone, ArrowRight, Check, Star, Users, T
 
 export default function CryptexLanding() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-gray-900 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
       {/* Navigation */}
-      <nav className="flex items-center justify-between p-6 max-w-7xl mx-auto">
+      <nav className="flex items-center justify-between p-6 max-w-8xl mx-auto">
         <div className="flex items-center space-x-2">
-          <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center font-bold text-lg">
-            CX
-          </div>
-          <span className="text-xl font-bold">CRYPTeX</span>
-        </div>
+          
+        <img className='h-15' src='/CRYPTeX (1).png'></img>
+        </div> 
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#" className="hover:text-purple-400 transition-colors">Home Page</a>
-          <a href="#" className="hover:text-purple-400 transition-colors">Portfolio</a>
-          <a href="#" className="hover:text-purple-400 transition-colors">Trading</a>
-          <a href="#" className="hover:text-purple-400 transition-colors">Contribute</a>
-          <a href="#" className="hover:text-purple-400 transition-colors">Settings</a>
+          <a href="#" className="hover:text-[#6736b3] transition-colors">Home Page</a>
+          <a href="#" className="hover:text-[#6736b3] transition-colors">Portfolio</a>
+          <a href="#" className="hover:text-[#6736b3] transition-colors">Trading</a>
+          <a href="#" className="hover:text-[#6736b3] transition-colors">Contribute</a>
+          <a href="#" className="hover:text-[#6736b3] transition-colors">Settings</a>
         </div>
-        <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-          Download Now
-        </Button>
+        
       </nav>
+
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-20">
-        <div className="text-center space-y-8">
-          <Badge variant="secondary" className="bg-purple-900/50 text-purple-300 border-purple-600">
-            🚀 Now Supporting Ethereum & Solana
-          </Badge>
+        <div className="text-center space-y-20">
           
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent leading-tight">
+          
+          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#210748] via-[#4e11ab] to-[#290c41] bg-clip-text text-transparent leading-tight">
             Your Gateway to the<br />
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#4e11ab] to-[#6b21a8] bg-clip-text text-transparent">
               Decentralized Web
             </span>
           </h1>
+
+          <Badge variant="secondary" className="bg-purple-900/50 text-purple-300 border-#8f4ff0 font-bold px-3 py-1.5">
+            🚀 Now Supporting Ethereum & Solana
+          </Badge>
           
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Effortlessly manage your Ethereum and Solana assets in one sleek, non-custodial wallet. 
             Fast, secure, and designed for the future of DeFi.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-            <Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg px-8 py-4">
+          <div className="flex flex-col sm:flex-row gap-10 justify-center items-center pt-8">
+            <Button size="lg" className="bg-gradient-to-r from-[#4e11ab] to-[#4e11ab] hover:from-[#210748] hover:to-[#773bb3] text-lg px-8 py-4">
               Get Started Free
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="border-purple-400 text-purple-300 hover:bg-purple-900/20 text-lg px-8 py-4">
-              Watch Demo
+            <Button size="lg" variant="outline" className="border-purple-400 text-0.5xl font-bold text-[#6920a6] bg-[#210748] hover:bg-white hover:text-[#210748] px-8 py-4">
+              Made By - Jal Patel
             </Button>
           </div>
           
           <div className="flex items-center justify-center space-x-8 pt-8 text-sm text-gray-400">
             <div className="flex items-center space-x-2">
               <Users className="h-4 w-4" />
-              <span>500K+ Users</span>
+              <span className='font-extrabold'>1K+ Users</span>
             </div>
             <div className="flex items-center space-x-2">
               <TrendingUp className="h-4 w-4" />
-              <span>$2B+ Secured</span>
+              <span className='font-extrabold'>$0 Secured</span>
             </div>
             <div className="flex items-center space-x-2">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <span>4.8/5 Rating</span>
+              <span className='font-extrabold'>4.81/5 Rating</span>
             </div>
           </div>
         </div>
