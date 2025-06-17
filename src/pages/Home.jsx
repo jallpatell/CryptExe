@@ -227,7 +227,7 @@ export default function CryptexLanding() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button size="lg" variant="outline" className="bg-gray-800 text-white font-extrabold hover:border-[#4e11ab] hover:border-2 hover:bg-white hover:text-black text-lg px-8 py-4">
-                View on GitHub
+                <./>project source code
               </Button>
             </div>
           </CardContent>
