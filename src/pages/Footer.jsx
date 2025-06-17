@@ -4,7 +4,7 @@ export default function Footer(){
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <img src="public/CRYPTeX (1).png" className="h-15 rounded-xl" alt="logo.png"></img>
+              <img src='public/CRYPTeX (1).png' className="h-15 rounded-xl" alt="logo.png"></img>
               <span className="text-lg font-bold">CRYPTeX</span>
             </div>
             <div className="flex gap-15 text-gray-400 ">
