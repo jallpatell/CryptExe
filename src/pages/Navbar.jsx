@@ -8,11 +8,11 @@ export default function() {
                 </div> 
 
                 <div className="hidden md:flex items-center space-x-8">
-                    <a href="#" className="hover:text-[#6736b3] transition-colors">Home Page</a>
-                    <a href="#" className="hover:text-[#6736b3] transition-colors">Portfolio</a>
-                    <a href="#" className="hover:text-[#6736b3] transition-colors">Trading</a>
-                    <a href="#" className="hover:text-[#6736b3] transition-colors">Contribute</a>
-                    <a href="#" className="hover:text-[#6736b3] transition-colors">Settings</a>
+                    <a href="#" className="hover:text-[#6736b3] hover:text-xl font-extrabold transition-colors">Home</a>
+                    <a href="#" className="hover:text-[#6736b3] hover:text-xl font-extrabold transition-colors">Wallet</a>
+                    <a href="#" className="hover:text-[#6736b3] hover:text-xl font-extrabold transition-colors">Portfolio</a>
+                    <a href="#" className="hover:text-[#6736b3] hover:text-xl font-extrabold transition-colors">Contribute</a>
+                    <a href="#" className="hover:text-[#6736b3] hover:text-xl font-extrabold transition-colors">Settings</a>
                 </div>
             </nav>
       </div>
