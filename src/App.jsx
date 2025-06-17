@@ -1,9 +1,14 @@
 import './App.css'
-import CryptexLanding from '@/pages/Home'
+import CryptexLanding from './pages/Home'
+import Wallet from './pages/Wallet'
 
 function App() {
   return (
-    <CryptexLanding />
+    <div>
+      <CryptexLanding />
+      <Wallet />
+    </div>
+    
   )
 }
 

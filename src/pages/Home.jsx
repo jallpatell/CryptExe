@@ -4,25 +4,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Shield, Zap, Globe, Lock, Smartphone, ArrowRight, Check, Star, Users, TrendingUp } from 'lucide-react';
 
+import Navbar from './Navbar';
+
 export default function CryptexLanding() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
       {/* Navigation */}
-      <nav className="flex items-center justify-between p-6 max-w-8xl mx-auto">
-        <div className="flex items-center space-x-2">
-          
-        <img className='h-15' src='/CRYPTeX (1).png'></img>
-        </div> 
-        <div className="hidden md:flex items-center space-x-8">
-          <a href="#" className="hover:text-[#6736b3] transition-colors">Home Page</a>
-          <a href="#" className="hover:text-[#6736b3] transition-colors">Portfolio</a>
-          <a href="#" className="hover:text-[#6736b3] transition-colors">Trading</a>
-          <a href="#" className="hover:text-[#6736b3] transition-colors">Contribute</a>
-          <a href="#" className="hover:text-[#6736b3] transition-colors">Settings</a>
-        </div>
-        
-      </nav>
-
+      <Navbar />
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-20">
@@ -51,7 +39,7 @@ export default function CryptexLanding() {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button size="lg" variant="outline" className="border-purple-400 text-0.5xl font-bold text-[#6920a6] bg-[#210748] hover:bg-white hover:text-[#210748] px-8 py-4">
-              Made By - Jal Patel
+              developer - jallpatell
             </Button>
           </div>
           
