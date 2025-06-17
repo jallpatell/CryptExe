@@ -6,6 +6,7 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base:'/',
   plugins: [
     react(),
     tailwindcss(),
@@ -15,5 +16,8 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, "./src"),
     },
-  },  
+  }, 
+  build: {
+    outDir: 'dist' // Ensure this matches Vercel's expected directory
+  }
 })
