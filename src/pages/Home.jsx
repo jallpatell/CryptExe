@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Shield, Zap, Globe, Lock, Smartphone, ArrowRight, Check, Star, Users, TrendingUp } from 'lucide-react';
 
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 export default function CryptexLanding() {
   return (
@@ -146,11 +147,12 @@ export default function CryptexLanding() {
 
       {/* Supported Networks */}
       <section className="max-w-7xl mx-auto px-6 py-20">
-        <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-600/30">
-          <CardContent className="p-12">
+        <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
+          <CardContent className="p-20">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-6">Multi-Chain by Design</h2>
-              <p className="text-xl text-gray-300">
+              <h2 className="text-5xl font-extrabold bg-gradient-to-r from-[#210748] via-[#4e11ab] to-[#290c41] bg-clip-text text-transparent leading-tight"
+              >Multi-Chain by Design</h2>
+              <p className="text-3xl text-gray-300">
                 Access the best of both worlds with native support for Ethereum and Solana ecosystems
               </p>
             </div>
@@ -212,19 +214,19 @@ export default function CryptexLanding() {
 
       {/* CTA Section */}
       <section className="max-w-7xl mx-auto px-6 py-20">
-        <Card className="bg-gradient-to-r from-purple-600 to-pink-600 border-0">
+        <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
           <CardContent className="p-12 text-center">
-            <h2 className="text-4xl font-bold mb-6">Ready to Take Control?</h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-extrabold bg-gradient-to-r from-[#210748] via-[#4e11ab] to-[#290c41] bg-clip-text text-transparent leading-tight mb-6">Ready to Take Control?</h2>
+            <p className="text-xl text-white mb-8 opacity-90 max-w-2xl mx-auto">
               Join hundreds of thousands of users who trust CRYPTeX with their digital assets. 
               Your journey into DeFi starts here.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="bg-white text-purple-600 hover:bg-gray-100 text-lg px-8 py-4">
-                Download for Free
+              <Button size="lg" variant="secondary" className="bg-white text-purple-600 hover:border-[#4e11ab] hover:border-2 hover:bg-black/10 hover:text-white text-lg px-8 py-4">
+                Join for Free
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-4">
+              <Button size="lg" variant="outline" className="border-purple-600 text-black hover:border-[#4e11ab] hover:border-2 hover:bg-black/10 hover:text-white text-lg px-8 py-4">
                 View on GitHub
               </Button>
             </div>
@@ -233,21 +235,7 @@ export default function CryptexLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center font-bold">
-                CX
-              </div>
-              <span className="text-lg font-bold">CRYPTeX</span>
-            </div>
-            <div className="text-gray-400 text-sm">
-              © 2025 CRYPTeX. Built for the decentralized future.
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
