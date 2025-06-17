@@ -3,7 +3,6 @@ import { useState } from "react"
 import * as bip39 from 'bip39';
 import SolanaWallet from "./Solanawallet";
 import EthWallet from "./EthWallet";
-import Key from "@/components/ui/key";
 
 
 export default function Wallet() {
