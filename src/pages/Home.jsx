@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Shield, Zap, Globe, Lock, Smartphone, ArrowRight, Check, Star, Users, TrendingUp } from 'lucide-react';
 
+
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -226,7 +227,7 @@ export default function CryptexLanding() {
                 Join for Free
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="bg-gray-800 text-white font-extrabold hover:border-[#4e11ab] hover:border-2 hover:bg-white hover:text-black text-lg px-8 py-4">
+              <Button size="lg" variant="outline" onClick={() => window.open('https://github.com/jallpatell/CRYPTeX', '_blank')} className="bg-gray-800 text-white font-extrabold hover:border-[#4e11ab] hover:border-2 hover:bg-white hover:text-black text-lg px-8 py-4">
                 project source code
               </Button>
             </div>

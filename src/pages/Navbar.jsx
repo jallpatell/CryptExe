@@ -1,5 +1,7 @@
-export default function() {
+import { useNavigate } from 'react-router-dom';
 
+export default function() {
+    const navigate = useNavigate()
     return( 
         <div className="border-2 border-[#000000] bg-black rounded-xl">
             <nav className="flex items-center  justify-between p-6 max-w-8xl mx-auto">
@@ -9,7 +11,7 @@ export default function() {
 
                 <div className="hidden md:flex items-center space-x-8">
                     <a href="#" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Home</a>
-                    <a href="#" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Wallet</a>
+                    <a href="#" onClick={() => navigate('/wallet')} className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Wallet</a>
                     <a href="#" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Portfolio</a>
                     <a href="#" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Contribute</a>
                     <a href="#" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Settings</a>
