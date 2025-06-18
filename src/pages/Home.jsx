@@ -12,14 +12,16 @@ export default function CryptexLanding() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
       {/* Navigation */}
-      <Navbar />
+        <Navbar />
+
+      
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-20">
         <div className="text-center space-y-20">
           
           
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#210748] via-[#4e11ab] to-[#290c41] bg-clip-text text-transparent leading-tight">
+          <h1 className="text-5xl mt-30 md:text-7xl font-bold bg-gradient-to-r from-[#210748] via-[#4e11ab] to-[#290c41] bg-clip-text text-transparent leading-tight">
             Your Gateway to the<br />
             <span className="bg-gradient-to-r from-[#4e11ab] to-[#6b21a8] bg-clip-text text-transparent">
               Decentralized Web
