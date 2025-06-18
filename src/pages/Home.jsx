@@ -160,7 +160,7 @@ export default function CryptexLanding() {
             <div className="grid md:grid-cols-2 gap-12">
               <div className="text-center space-y-6">
                 <div className="w-25  h-25 bg-transparent rounded-full flex items-center justify-center mx-auto">
-                  <img src='public/eth_logo.webp' className='hover:shadow-[0px_0px_60px_0px_rgba(140,46,255,1)]'></img>
+                  <img src='/eth_logo.webp' className='hover:shadow-[0px_0px_60px_0px_rgba(140,46,255,1)]'></img>
                 </div>
                 <h3 className="text-2xl text-white font-bold">Ethereum Network</h3>
                 <ul className="space-y-3 text-gray-300">
@@ -185,7 +185,7 @@ export default function CryptexLanding() {
               
               <div className="text-center space-y-6">
                 <div className="w-25  h-25 bg-transparent rounded-full flex items-center justify-center mx-auto">
-                  <img src='public/sol_logo.jpg' className='hover:shadow-[0px_0px_60px_0px_rgba(140,46,255,1)]'></img>
+                  <img src='/sol_logo.jpg' className='hover:shadow-[0px_0px_60px_0px_rgba(140,46,255,1)]'></img>
                 </div>
                 <h3 className="text-2xl text-white font-bold">Solana Network</h3>
                 <ul className="space-y-3 text-gray-300">
