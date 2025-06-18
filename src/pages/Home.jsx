@@ -39,8 +39,8 @@ export default function CryptexLanding() {
               Get Started Free
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="border-purple-400 text-0.5xl font-bold text-[#6920a6] bg-[#210748] hover:bg-white hover:text-[#210748] px-8 py-4">
-              developer - jallpatell
+            <Button size="lg"  onClick={() => window.open("https://www.coinbase.com/en-in/learn/crypto-basics/what-is-a-crypto-wallet", "_blank")} variant="outline" className="border-purple-400 text-0.5xl font-bold text-[#6920a6] bg-[#210748] hover:bg-white hover:text-[#210748] px-8 py-4">
+              Learn More about crypto wallets
             </Button>
           </div>
           
