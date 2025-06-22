@@ -13,9 +13,6 @@ export default function CryptexLanding() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
       {/* Navigation */}
         <Navbar />
-
-      
-
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-20">
         <div className="text-center space-y-20">
