@@ -7,6 +7,11 @@ import EthWallet from "./EthWallet";
 
 export default function Wallet() {
   const [mnemonic, setMnemonic] = useState([]);
+  const [selectedChain, setSelectedChain] = useState('');
+  const [ethAddresses, setEthAddresses] = useState([]);
+  const [solPublicKeys, setSolPublicKeys] = useState([]);
+  const [ethCurrentIndex, setEthCurrentIndex] = useState(0);
+  const [solCurrentIndex, setSolCurrentIndex] = useState(0);
 
   async function displayMn() {
     try {
@@ -49,9 +54,21 @@ export default function Wallet() {
           ))}
         </div>
 
-        <div className="flex justify-center gap-x-100">
-          <SolanaWallet />
-          <EthWallet />
+        <div className="text-center mt-8">
+          <select 
+            onChange={(e) => setSelectedChain(e.target.value)} 
+            value={selectedChain}
+            className="px-4 py-2 bg-gray-800 text-white rounded-md"
+          >
+            <option value="" disabled>Select a Chain</option>
+            <option value="eth">Ethereum</option>
+            <option value="sol">Solana</option>
+          </select>
+        </div>
+
+        <div className="flex justify-center gap-x-100 mt-6 max-h-[60vh] overflow-y-auto">
+          {selectedChain === 'sol' && <SolanaWallet mnemonic={mnemonic.join(" ")} publicKeys={solPublicKeys} setPublicKeys={setSolPublicKeys} currentIndex={solCurrentIndex} setCurrentIndex={setSolCurrentIndex} />}
+          {selectedChain === 'eth' && <EthWallet mnemonic={mnemonic.join(" ")} addresses={ethAddresses} setAddresses={setEthAddresses} currentIndex={ethCurrentIndex} setCurrentIndex={setEthCurrentIndex} />}
         </div>
         
       </div>
