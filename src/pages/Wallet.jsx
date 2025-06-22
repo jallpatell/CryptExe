@@ -37,7 +37,7 @@ export default function Wallet() {
         </p>
 
         <button
-          className="block mx-auto px-4 py-2 bg-white text-black rounded-2xl mt-20 hover:bg-black hover:text-white"
+          className="block mx-auto px-4 py-2 bg-white hover:border-2 hover:border-white text-black rounded-2xl mt-20 hover:bg-black hover:text-white"
           onClick={displayMn} // <-- added onClick here
         >
           Create Seed Phrase
