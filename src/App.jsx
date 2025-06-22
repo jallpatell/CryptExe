@@ -6,7 +6,7 @@ import Wallet from './pages/Wallet'
 
 export default function App() {
   return (
-    <div className='fixed top-0 left-0 right-0 bottom-0 overflow-y-auto overscroll-none bg-gray-900'>
+    <div >
     <HashRouter> 
         <Routes>
           <Route path="/" element={<CryptexLanding />} />
