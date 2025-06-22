@@ -4,14 +4,12 @@ import { derivePath } from "ed25519-hd-key";
 import { Keypair } from "@solana/web3.js";
 import nacl from "tweetnacl"
 
-export default function SolanaWallet({ mnemonic }) {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [publicKeys, setPublicKeys] = useState([]);
+export default function SolanaWallet({ mnemonic, publicKeys, setPublicKeys, currentIndex, setCurrentIndex }) {
 
     return <div>
         <button className="block mx-auto px-4 py-2 bg-white text-black rounded-2xl mt-20 hover:bg-black hover:text-white"
-         onClick={function() {
-            const seed = mnemonicToSeed(mnemonic);
+         onClick={async function() {
+            const seed = await mnemonicToSeed(mnemonic);
             const path = `m/44'/501'/${currentIndex}'/0'`;
             const derivedSeed = derivePath(path, seed.toString("hex")).key;
             const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function() {
     const navigate = useNavigate()
@@ -10,10 +10,10 @@ export default function() {
                 </div> 
 
                 <div className="hidden md:flex items-center space-x-8">
-                    <a href="#" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Home</a>
-                    <a href="#" onClick={() => navigate('/wallet')} className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Wallet</a>
-                    <a href="#" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Portfolio</a>
-                    <a href="#" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Contribute</a>
+                    <Link to="/" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Home</Link>
+                    <Link to="/wallet" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Wallet</Link>
+                    <Link to="/portfolio" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Portfolio</Link>
+                    <a href="https://github.com/jallpatell/CRYPTeX" target='_blank' className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Contribute</a>
                     <a href="#" className="hover:text-[#ffffff] text-gray-400 text-xl font-extrabold transition-colors">Settings</a>
                 </div>
             </nav>
