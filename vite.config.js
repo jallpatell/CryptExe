@@ -18,7 +18,6 @@ export default defineConfig({
     },
   }, 
   build: {
-    outDir: 'dist', // Ensure this matches Vercel's expected directory
-    chunkSizeWarningLimit: 1000,
+    outDir: 'dist' // Ensure this matches Vercel's expected directory
   }
 })
