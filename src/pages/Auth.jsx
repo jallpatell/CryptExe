@@ -1,257 +1,60 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff, Mail, Lock, Chrome } from 'lucide-react';
+import { Chrome, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, googleProvider } from '../lib/firebase';
 import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../lib/firebase';
 
 export default function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    try {
-      if (isLogin) {
-        // Login logic
-        await signInWithEmailAndPassword(auth, formData.email, formData.password);
-        console.log('User signed in successfully!');
-      } else {
-        // Register logic
-        if (formData.password !== formData.confirmPassword) {
-          alert('Passwords do not match!');
-          setIsLoading(false);
-          return;
-        }
-        await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-        console.log('User registered successfully!');
-      }
-      navigate('/wallet'); // Redirect to wallet on successful auth
-    } catch (error) {
-      console.error('Authentication error:', error);
-      alert(error.message); // Display error to user
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const handleGoogleAuth = async () => {
     setIsLoading(true);
     try {
       await signInWithPopup(auth, googleProvider);
-      console.log('Google OAuth initiated and user signed in!');
-      navigate('/wallet'); // Redirect to wallet on successful Google auth
+      navigate('/wallet');
     } catch (error) {
       console.error('Google authentication error:', error);
-      alert(error.message); // Display error to user
+      alert(error.message);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-4">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-600 rounded-full opacity-10 blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-600 rounded-full opacity-10 blur-3xl"></div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4 pt-28 pb-10 text-white">
+      <div className="w-full max-w-md">
+        <div className="bg-gray-900/60 backdrop-blur-xl border border-gray-800 rounded-2xl p-10 shadow-2xl text-center">
+          <h1 className="text-5xl font-extrabold bg-gradient-to-r from-[#4e11ab] to-[#431e5e] bg-clip-text text-transparent mb-4">
+            Welcome to Cryptex
+          </h1>
+          <p className="text-gray-300 text-lg mb-10">
+            Connect your Google account to access your crypto wallets
+          </p>
 
-      {/* Header */}
-      <div className="absolute top-6 left-6">
-        <div className="flex items-center space-x-2">
-          <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
-            <span className="text-white font-bold text-sm">CRYPT</span>
-          </div>
-          <span className="text-white font-semibold text-xl">eli</span>
-        </div>
-      </div>
-
-      {/* Main Auth Container */}
-      <div className="relative w-full max-w-md">
-        <div className="bg-gray-900/50 backdrop-blur-xl border border-gray-800 rounded-2xl p-8 shadow-2xl">
-          {/* Toggle Buttons */}
-          <div className="flex bg-gray-800/50 rounded-xl p-1 mb-8">
-            <button
-              onClick={() => setIsLogin(true)}
-              className={`flex-1 py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
-                isLogin 
-                  ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg' 
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              Sign In
-            </button>
-            <button
-              onClick={() => setIsLogin(false)}
-              className={`flex-1 py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
-                !isLogin 
-                  ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg' 
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              Sign Up
-            </button>
-          </div>
-
-          {/* Title */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-2">
-              {isLogin ? 'Welcome Back' : 'Create Account'}
-            </h1>
-            <p className="text-gray-400">
-              {isLogin 
-                ? 'Access your gateway to the decentralized web' 
-                : 'Join the future of decentralized finance'
-              }
-            </p>
-          </div>
-
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Field */}
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-gray-400" />
+          <button
+            type="button"
+            onClick={handleGoogleAuth}
+            disabled={isLoading}
+            className="w-full py-4 bg-white hover:bg-gray-100 text-gray-900 font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3 disabled:opacity-50"
+          >
+            {isLoading ? (
+              <div className="flex items-center space-x-2">
+                <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                <span>Signing In...</span>
               </div>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="Email address"
-                required
-                className="w-full pl-12 pr-4 py-4 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-              />
-            </div>
-
-            {/* Password Field */}
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Lock className="h-5 w-5 text-gray-400" />
-              </div>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                placeholder="Password"
-                required
-                className="w-full pl-12 pr-12 py-4 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-white transition-colors"
-              >
-                {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-              </button>
-            </div>
-
-            {/* Confirm Password Field (Sign Up only) */}
-            {!isLogin && (
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  placeholder="Confirm password"
-                  required
-                  className="w-full pl-12 pr-4 py-4 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                />
-              </div>
+            ) : (
+              <>
+                <Chrome className="h-5  w-5" />
+                <span>Continue with Google</span>
+              </>
             )}
-
-            {/* Forgot Password (Sign In only) */}
-            {isLogin && (
-              <div className="text-right">
-                <button
-                  type="button"
-                  className="text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors"
-                >
-                  Forgot password?
-                </button>
-              </div>
-            )}
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-            >
-              {isLoading ? (
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  <span>{isLogin ? 'Signing In...' : 'Creating Account...'}</span>
-                </div>
-              ) : (
-                isLogin ? 'Sign In' : 'Create Account'
-              )}
-            </button>
-
-            {/* Divider */}
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-700"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-gray-900 text-gray-400">or continue with</span>
-              </div>
-            </div>
-
-            {/* Google OAuth Button */}
-            <button
-              type="button"
-              onClick={handleGoogleAuth}
-              className="w-full py-4 bg-white hover:bg-gray-100 text-gray-900 font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3"
-            >
-              <Chrome className="h-5 w-5" />
-              <span>Continue with Google</span>
-            </button>
-          </form>
-
-          {/* Terms */}
-          {!isLogin && (
-            <p className="text-xs text-gray-400 text-center mt-6">
-              By creating an account, you agree to our{' '}
-              <button className="text-purple-400 hover:text-purple-300 underline">
-                Terms of Service
-              </button>{' '}
-              and{' '}
-              <button className="text-purple-400 hover:text-purple-300 underline">
-                Privacy Policy
-              </button>
-            </p>
-          )}
+          </button>
         </div>
 
-        {/* Security Notice */}
-        <div className="mt-6 p-4 bg-gray-800/30 border border-gray-700 rounded-xl backdrop-blur-sm">
-          <div className="flex items-center space-x-2 text-sm text-gray-300">
-            <Lock className="h-4 w-4 text-purple-400" />
-            <span>Your data is secured with end-to-end encryption</span>
-          </div>
+        <div className="mt-6 p-4 bg-gray-800/30 border border-gray-700 rounded-xl backdrop-blur-sm text-sm text-gray-300 flex items-center space-x-2">
+          <Lock className="h-4 w-4 text-purple-400" />
+          <span>Your login is secure and encrypted</span>
         </div>
       </div>
     </div>

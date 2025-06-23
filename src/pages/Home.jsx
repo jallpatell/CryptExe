@@ -71,7 +71,7 @@ export default function CryptexLanding() {
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="bg-gray-900/50 border-purple-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
+          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
             <CardHeader>
               <div className="w-20 h-12 bg-gradient-to-r from-[#dc3d3d] to-[#dc3d3d] rounded-lg flex items-center justify-center mb-4">
                 <Shield className="h-6 w-6" />
@@ -83,7 +83,7 @@ export default function CryptexLanding() {
             </CardHeader>
           </Card>
           
-          <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
+          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
             <CardHeader>
               <div className="w-12 h-12 bg-gradient-to-r from-[#5a9cde] to-[#5a9cde] rounded-lg flex items-center justify-center mb-4">
                 <Zap className="h-6 w-6" />
@@ -95,7 +95,7 @@ export default function CryptexLanding() {
             </CardHeader>
           </Card>
           
-          <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
+          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
             <CardHeader>
               <div className="w-12 h-12 bg-gradient-to-r from-[#8de18d] to-[#8de18d] rounded-lg flex items-center justify-center mb-4">
                 <Globe className="h-6 w-6" />
@@ -107,7 +107,7 @@ export default function CryptexLanding() {
             </CardHeader>
           </Card>
           
-          <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
+          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
             <CardHeader>
               <div className="w-12 h-12 bg-gradient-to-r from-[#d97dd2] to-[#d97dd2] rounded-lg flex items-center justify-center mb-4">
                 <Lock className="h-6 w-6" />
@@ -119,7 +119,7 @@ export default function CryptexLanding() {
             </CardHeader>
           </Card>
           
-          <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
+          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
             <CardHeader>
               <div className="w-12 h-12 bg-gradient-to-r from-[#34d5d3] to-[#34d5d3] rounded-lg flex items-center justify-center mb-4">
                 <Smartphone className="h-6 w-6" />
@@ -131,7 +131,7 @@ export default function CryptexLanding() {
             </CardHeader>
           </Card>
           
-          <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
+          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
             <CardHeader>
               <div className="w-12 h-12 bg-gradient-to-r from-[#efefef] to-[#efefef] rounded-lg flex items-center justify-center mb-4">
                 <TrendingUp className="h-6 w-6" />
@@ -147,7 +147,7 @@ export default function CryptexLanding() {
 
       {/* Supported Networks */}
       <section className="flex-grow max-w-7xl mx-auto px-6 py-20">
-        <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
+        <Card className="bg-gray-900/50 border-gray-800/50 hover:border-gray-600/50 transition-all duration-300 hover:scale-105">
           <CardContent className="p-20">
             <div className="text-center mb-12">
               <h2 className="text-5xl font-extrabold bg-gradient-to-r text-white leading-tight"
@@ -214,7 +214,7 @@ export default function CryptexLanding() {
 
       {/* CTA Section */}
       <section className="flex-grow max-w-7xl mx-auto px-6 py-20">
-        <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
+        <Card className="bg-gray-900/50 border-gray-800/50 hover:border-gray-600/50 transition-all duration-300 hover:scale-105">
           <CardContent className="p-12 text-center">
             <h2 className="text-4xl font-extrabold text-white leading-tight mb-6">Ready to Take Control?</h2>
             <p className="text-xl text-white mb-8 opacity-90 max-w-2xl mx-auto">
