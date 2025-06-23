@@ -8,14 +8,19 @@ export default function EthWallet({mnemonic, addresses, setAddresses, currentInd
         <div>
             <button className="block mx-auto px-4 py-2 bg-white text-black rounded-2xl mt-20 hover:bg-black hover:text-white"
              onClick={async function() {
-                const seed = await mnemonicToSeed(mnemonic);
-                const derivationPath = `m/44'/60'/${currentIndex}'/0'`;
-                 const hdNode = HDNodeWallet.fromSeed(seed);
-                 const child = hdNode.derivePath(derivationPath);
-                 const privateKey = child.privateKey;
-                 const wallet = new Wallet(privateKey);
-                 setCurrentIndex(currentIndex + 1);
-                setAddresses([...addresses, wallet.address]);
+                try {
+                  const seed = await mnemonicToSeed(mnemonic);
+                  const derivationPath = `m/44'/60'/${currentIndex}'/0'`;
+                  const hdNode = HDNodeWallet.fromSeed(seed);
+                  const child = hdNode.derivePath(derivationPath);
+                  const privateKey = child.privateKey;
+                  const wallet = new Wallet(privateKey);
+                  setCurrentIndex(currentIndex + 1);
+                  setAddresses([...addresses, wallet.address]);
+                } catch (error) {
+                  console.error("Error adding Ethereum wallet:", error);
+                  // Optionally, provide user feedback here
+                }
             }}>
                 Add ETH wallet
             </button>

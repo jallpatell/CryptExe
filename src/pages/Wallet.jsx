@@ -24,18 +24,24 @@ export default function Wallet() {
   const [solCurrentIndex, setSolCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const storedMnemonic = localStorage.getItem('mnemonic');
-    if (storedMnemonic) {
-      setMnemonic(JSON.parse(storedMnemonic));
-    }
+    // Mnemonic storage in localStorage is insecure for production applications.
+    // In a real-world scenario, consider more secure methods like encrypted storage
+    // or integrating with hardware wallets. For this debug exercise, we are
+    // removing persistent storage in localStorage.
+    // const storedMnemonic = localStorage.getItem('mnemonic');
+    // if (storedMnemonic) {
+    //   setMnemonic(JSON.parse(storedMnemonic));
+    // }
   }, []);
   
   useEffect(() => {
-    if (mnemonic.length > 0) {
-      localStorage.setItem('mnemonic', JSON.stringify(mnemonic));
-    } else {
-      localStorage.removeItem('mnemonic');
-    }
+    // Mnemonic storage in localStorage is insecure for production applications.
+    // localStorage.setItem('mnemonic', JSON.stringify(mnemonic));
+    // if (mnemonic.length > 0) {
+    //   localStorage.setItem('mnemonic', JSON.stringify(mnemonic));
+    // } else {
+    //   localStorage.removeItem('mnemonic');
+    // }
   }, [mnemonic]);
 
   async function displayMn() {

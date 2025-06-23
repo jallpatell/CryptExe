@@ -9,13 +9,18 @@ export default function SolanaWallet({ mnemonic, publicKeys, setPublicKeys, curr
     return <div>
         <button className="block mx-auto px-4 py-2 bg-white text-black rounded-2xl mt-20 hover:bg-black hover:text-white"
          onClick={async function() {
-            const seed = await mnemonicToSeed(mnemonic);
-            const path = `m/44'/501'/${currentIndex}'/0'`;
-            const derivedSeed = derivePath(path, seed.toString("hex")).key;
-            const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
-            const keypair = Keypair.fromSecretKey(secret);
-            setCurrentIndex(currentIndex + 1);
-            setPublicKeys([...publicKeys, keypair.publicKey]);
+            try {
+              const seed = await mnemonicToSeed(mnemonic);
+              const path = `m/44'/501'/${currentIndex}'/0'`;
+              const derivedSeed = derivePath(path, seed.toString("hex")).key;
+              const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
+              const keypair = Keypair.fromSecretKey(secret);
+              setCurrentIndex(currentIndex + 1);
+              setPublicKeys([...publicKeys, keypair.publicKey]);
+            } catch (error) {
+              console.error("Error adding Solana wallet:", error);
+              // Optionally, provide user feedback here
+            }
         }}>
             Add Solana wallet
         </button>
