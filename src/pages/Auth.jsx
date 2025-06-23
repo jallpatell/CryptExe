@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, Chrome } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, googleProvider } from '../lib/firebase';
+import { signInWithPopup } from 'firebase/auth';
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,6 +14,7 @@ export default function AuthPage() {
     confirmPassword: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setFormData({
@@ -22,16 +27,42 @@ export default function AuthPage() {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    console.log(isLogin ? 'Login attempt:' : 'Register attempt:', formData);
-    setIsLoading(false);
+    try {
+      if (isLogin) {
+        // Login logic
+        await signInWithEmailAndPassword(auth, formData.email, formData.password);
+        console.log('User signed in successfully!');
+      } else {
+        // Register logic
+        if (formData.password !== formData.confirmPassword) {
+          alert('Passwords do not match!');
+          setIsLoading(false);
+          return;
+        }
+        await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+        console.log('User registered successfully!');
+      }
+      navigate('/wallet'); // Redirect to wallet on successful auth
+    } catch (error) {
+      console.error('Authentication error:', error);
+      alert(error.message); // Display error to user
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleGoogleAuth = () => {
-    console.log('Google OAuth initiated');
-    // Implement Google OAuth logic here
+  const handleGoogleAuth = async () => {
+    setIsLoading(true);
+    try {
+      await signInWithPopup(auth, googleProvider);
+      console.log('Google OAuth initiated and user signed in!');
+      navigate('/wallet'); // Redirect to wallet on successful Google auth
+    } catch (error) {
+      console.error('Google authentication error:', error);
+      alert(error.message); // Display error to user
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

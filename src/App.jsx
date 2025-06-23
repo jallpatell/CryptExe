@@ -5,6 +5,7 @@ import Portfolio from './pages/Portfolio'
 import Wallet from './pages/Wallet'
 import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
+import AuthPage from './pages/Auth'
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<CryptexLanding />} />
+          <Route path="/auth" element={<AuthPage />} />
           <Route
             path="/wallet"
             element={
@@ -21,7 +23,14 @@ export default function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/portfolio" element={<Portfolio />} />
+          <Route
+            path="/portfolio"
+            element={
+              <PrivateRoute>
+                <Portfolio />
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>
       </AuthProvider>
