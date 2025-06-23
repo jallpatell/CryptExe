@@ -5,9 +5,16 @@ import SolanaWallet from "./Solanawallet";
 import EthWallet from "./EthWallet";
 import { Eye, EyeOff } from "lucide-react";
 import Footer from "./Footer";
+import { useAuth } from '../context/AuthContext';
 
 
 export default function Wallet() {
+  const { isAuthenticated, user, loading } = useAuth();
+
+  console.log("Wallet - isAuthenticated:", isAuthenticated);
+  console.log("Wallet - User:", user);
+  console.log("Wallet - Loading:", loading);
+
   const [mnemonic, setMnemonic] = useState([]);
   const [isMnemonicVisible, setIsMnemonicVisible] = useState(false);
   const [selectedChain, setSelectedChain] = useState('');
@@ -53,7 +60,7 @@ export default function Wallet() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex-coloumn text-white">
       <Navbar />
 
       {/* Hero */}  
@@ -125,5 +132,7 @@ export default function Wallet() {
       </div>
       <Footer />
     </div>
+
+
   );
 }

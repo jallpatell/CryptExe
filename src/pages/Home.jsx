@@ -10,11 +10,11 @@ import Footer from './Footer';
 
 export default function CryptexLanding() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
+    <div className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-y-auto overflow-x-hidden">
       {/* Navigation */}
         <Navbar />
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
+      <section className="flex-grow max-w-7xl mx-auto px-6 py-20 pt-[80px]">
         <div className="text-center space-y-20">
           
           
@@ -146,7 +146,7 @@ export default function CryptexLanding() {
       </section>
 
       {/* Supported Networks */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
+      <section className="flex-grow max-w-7xl mx-auto px-6 py-20">
         <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
           <CardContent className="p-20">
             <div className="text-center mb-12">
@@ -213,7 +213,7 @@ export default function CryptexLanding() {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
+      <section className="flex-grow max-w-7xl mx-auto px-6 py-20">
         <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
           <CardContent className="p-12 text-center">
             <h2 className="text-4xl font-extrabold text-white leading-tight mb-6">Ready to Take Control?</h2>
