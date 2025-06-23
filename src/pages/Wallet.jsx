@@ -6,6 +6,10 @@ import EthWallet from "./EthWallet";
 import { Eye, EyeOff } from "lucide-react";
 import Footer from "./Footer";
 import { useAuth } from '../context/AuthContext';
+import { db } from '../lib/firebase'; // Import db
+import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore"; // Import Firestore functions
+import CryptoJS from 'crypto-js'; // Import CryptoJS
+import { PublicKey } from "@solana/web3.js"; // Import PublicKey
 
 export default function Wallet() {
   const { isAuthenticated, user, loading } = useAuth();
@@ -18,24 +22,156 @@ export default function Wallet() {
   const [ethCurrentIndex, setEthCurrentIndex] = useState(0);
   const [solCurrentIndex, setSolCurrentIndex] = useState(0);
 
+  // Effect to load wallet data from Firestore when user changes or mounts
+  useEffect(() => {
+    const loadWalletData = async () => {
+      console.log("LOAD: Initiating load wallet data function.");
+      console.log("LOAD: Current user state - user:", user, "loading:", loading);
+
+      if (loading) {
+        console.log("LOAD: Still loading authentication state. Returning.");
+        return;
+      }
+
+      if (user && user.uid) {
+        console.log(`LOAD: Authenticated user found. Attempting to load data for UID: ${user.uid}`);
+        try {
+          const userDocRef = doc(db, "userWallets", user.uid);
+          console.log(`LOAD: Fetching document from Firestore: userWallets/${user.uid}`);
+          const docSnap = await getDoc(userDocRef);
+          console.log(`LOAD: Document snapshot received. Exists: ${docSnap.exists()}`);
+
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            console.log("LOAD: Raw data from Firestore:", data);
+            let decryptedMnemonic = [];
+            if (data.encryptedMnemonic) {
+              try {
+                const bytes = CryptoJS.AES.decrypt(data.encryptedMnemonic, user.uid);
+                const originalText = bytes.toString(CryptoJS.enc.Utf8);
+                decryptedMnemonic = JSON.parse(originalText);
+                console.log("LOAD: Mnemonic decrypted successfully.");
+              } catch (decryptError) {
+                console.error("LOAD: Error decrypting mnemonic:", decryptError);
+                // Optionally, clear corrupted data or show error to user
+              }
+            }
+            setMnemonic(decryptedMnemonic);
+            setEthAddresses(data.ethAddresses || []);
+            // Convert string public keys back to PublicKey objects on load
+            setSolPublicKeys(data.solPublicKeys ? data.solPublicKeys.map(pkStr => new PublicKey(pkStr)) : []);
+            setEthCurrentIndex(data.ethCurrentIndex || 0);
+            setSolCurrentIndex(data.solCurrentIndex || 0);
+            setSelectedChain(data.selectedChain || '');
+            console.log("LOAD: Wallet state updated from Firestore data.");
+          } else {
+            console.log("LOAD: User wallet document does not exist in Firestore. Resetting local state.");
+            // Document does not exist, reset state for new user or no existing data
+            setMnemonic([]);
+            setEthAddresses([]);
+            setSolPublicKeys([]);
+            setEthCurrentIndex(0);
+            setSolCurrentIndex(0);
+            setSelectedChain('');
+          }
+        } catch (error) {
+          console.error("LOAD: Error loading wallet data from Firestore:", error);
+          // Handle error, e.g., show a message to the user
+        }
+      } else {
+        console.log("LOAD: No authenticated user. Clearing local wallet state.");
+        // No authenticated user, clear state
+        setMnemonic([]);
+        setEthAddresses([]);
+        setSolPublicKeys([]);
+        setEthCurrentIndex(0);
+        setSolCurrentIndex(0);
+        setSelectedChain('');
+      }
+    };
+    loadWalletData();
+  }, [user, loading]);
+
+  // Effect to save wallet data to Firestore whenever state changes
+  useEffect(() => {
+    const saveWalletData = async () => {
+      console.log("SAVE: Initiating save wallet data function.");
+      console.log("SAVE: Current user state - user:", user, "loading:", loading);
+      if (user && user.uid && !loading) {
+        console.log(`SAVE: Authenticated user found. Attempting to save data for UID: ${user.uid}`);
+        try {
+          let encryptedMnemonic = '';
+          if (mnemonic.length > 0) {
+            encryptedMnemonic = CryptoJS.AES.encrypt(JSON.stringify(mnemonic), user.uid).toString();
+            console.log("SAVE: Mnemonic encrypted.");
+          }
+
+          // Convert PublicKey objects to base58 strings for Firestore storage
+          const solPublicKeysForFirestore = solPublicKeys.map(pk => pk.toBase58());
+          console.log("SAVE: Solana Public Keys converted to base58 strings.");
+
+          const walletData = {
+            encryptedMnemonic: encryptedMnemonic,
+            ethAddresses: ethAddresses,
+            solPublicKeys: solPublicKeysForFirestore,
+            ethCurrentIndex: ethCurrentIndex,
+            solCurrentIndex: solCurrentIndex,
+            selectedChain: selectedChain,
+          };
+          console.log("SAVE: Data prepared for Firestore:", walletData);
+          await setDoc(doc(db, "userWallets", user.uid), walletData, { merge: true });
+          console.log("SAVE: Wallet data successfully saved to Firestore!");
+        } catch (error) {
+          console.error("SAVE: Error saving wallet data to Firestore:", error);
+        }
+      } else {
+        console.log("SAVE: No authenticated user or still loading. Not saving.");
+      }
+    };
+    // Only save if mnemonic is not empty or if it was just cleared (empty array)
+    // This prevents saving an empty state on initial load before any mnemonic is generated.
+    if (user && !loading && (mnemonic.length > 0 || ethAddresses.length > 0 || solPublicKeys.length > 0 || ethCurrentIndex > 0 || solCurrentIndex > 0 || selectedChain !== '')) {
+        saveWalletData();
+    } else if (user && !loading && mnemonic.length === 0 && ethAddresses.length === 0 && solPublicKeys.length === 0 && ethCurrentIndex === 0 && solCurrentIndex === 0 && selectedChain === '') {
+        // This case handles when all data has been intentionally cleared by the user (e.g., delete mnemonic)
+        // We still want to persist this empty state to Firestore.
+        saveWalletData();
+    }
+  }, [mnemonic, ethAddresses, solPublicKeys, ethCurrentIndex, solCurrentIndex, selectedChain, user, loading]);
+
   async function displayMn() {
     try {
       const mn = await bip39.generateMnemonic();
       const words = mn.split(" ");
       setMnemonic(words);
+      console.log("Mnemonic generated and set.");
     } catch (err) {
-      console.error("Error generating mnemonic:", err);
+      console.error("DISPLAY_MN: Error generating mnemonic:", err);
     }
   }
 
   function deleteMnemonic() {
     if (window.confirm("Are you sure you want to delete the seed phrase? This will delete all associated wallets.")) {
+      console.log("DELETE: User confirmed deletion. Clearing local state.");
       setMnemonic([]);
       setEthAddresses([]);
       setSolPublicKeys([]);
       setEthCurrentIndex(0);
       setSolCurrentIndex(0);
       setSelectedChain('');
+      
+      // Clear from Firestore as well
+      if (user && user.uid) {
+        console.log(`DELETE: Attempting to delete wallet document for UID: ${user.uid}`);
+        try {
+          deleteDoc(doc(db, "userWallets", user.uid));
+          console.log("DELETE: Wallet data successfully deleted from Firestore!");
+        } catch (error) {
+          console.error("DELETE: Error deleting wallet data from Firestore:", error);
+        }
+      } else {
+        console.log("DELETE: No authenticated user. Only local state cleared.");
+      }
     }
   }
 
