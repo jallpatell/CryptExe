@@ -71,9 +71,9 @@ export default function CryptexLanding() {
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="bg-gray-900/50 border-purple-800/50 hover:border-purple-600/50 transition-all duration-300 hover:scale-105">
+          <Card className="bg-gray-900/50 border-purple-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-[#dc3d3d] to-[#dc3d3d] rounded-lg flex items-center justify-center mb-4">
+              <div className="w-20 h-12 bg-gradient-to-r from-[#dc3d3d] to-[#dc3d3d] rounded-lg flex items-center justify-center mb-4">
                 <Shield className="h-6 w-6" />
               </div>
               <CardTitle className="text-white">Military-Grade Security</CardTitle>
@@ -239,4 +239,3 @@ export default function CryptexLanding() {
     </div>
   );
 }
-

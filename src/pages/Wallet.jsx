@@ -66,11 +66,11 @@ export default function Wallet() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex-coloumn text-white">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col text-white">
       <Navbar />
 
-      {/* Hero */}  
-      <div className="pb-8">
+      {/* Main Content Area */}
+      <main className="flex-grow pb-8">
         <h1 className="font-extrabold mt-15 text-6xl text-center bg-gradient-to-r from-[#4e11ab] to-[#431e5e] bg-clip-text text-transparent">
           Manage Wallet
         </h1>
@@ -135,7 +135,7 @@ export default function Wallet() {
             </div>
           </>
         )}
-      </div>
+      </main>
       <Footer />
     </div>
 
