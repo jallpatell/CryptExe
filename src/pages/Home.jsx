@@ -71,9 +71,9 @@ export default function CryptexLanding() {
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
+          <Card className="bg-gray-900/50 border-gray-800/50 w-70 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
             <CardHeader>
-              <div className="w-20 h-12 bg-gradient-to-r from-[#dc3d3d] to-[#dc3d3d] rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-[#dc3d3d] to-[#dc3d3d] rounded-lg flex items-center justify-center mb-4">
                 <Shield className="h-6 w-6" />
               </div>
               <CardTitle className="text-white">Military-Grade Security</CardTitle>
@@ -226,8 +226,8 @@ export default function CryptexLanding() {
                 Join for Free
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => window.open('https://github.com/jallpatell/CRYPTeX', '_blank')} className="bg-gray-800 text-white font-extrabold hover:border-[#4e11ab] hover:border-2 hover:bg-white hover:text-black text-lg px-8 py-4">
-                project source code
+              <Button size="lg" variant="outline" onClick={() => window.open('https://github.com/jallpatell', '_blank')} className="bg-gray-800 text-white font-extrabold hover:border-[#4e11ab] hover:border-2 hover:bg-white hover:text-black text-lg px-8 py-4">
+                About Me
               </Button>
             </div>
           </CardContent>

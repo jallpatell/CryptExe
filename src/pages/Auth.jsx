@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Chrome, Lock } from 'lucide-react';
+import { Chrome, Lock, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../lib/firebase';
@@ -22,40 +22,50 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4 pt-28 pb-10 text-white">
-      <div className="w-full max-w-md">
-        <div className="bg-gray-900/60 backdrop-blur-xl border border-gray-800 rounded-2xl p-10 shadow-2xl text-center">
-          <h1 className="text-5xl font-extrabold bg-gradient-to-r from-[#4e11ab] to-[#431e5e] bg-clip-text text-transparent mb-4">
-            Welcome to Cryptex
-          </h1>
-          <p className="text-gray-300 text-lg mb-10">
-            Connect your Google account to access your crypto wallets
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col items-center justify-center px-4 text-white">
+      <div className="flex-grow flex items-center justify-center w-full">
+        <div className="w-full max-w-md">
+          <div className="bg-gray-900/50 backdrop-blur-lg border border-gray-700 rounded-2xl p-8 shadow-xl text-center hover:shadow-2xl transition-shadow duration-300">
+            <div className="mb-8">
+              <h1 className="text-5xl font-extrabold bg-gradient-to-r from-[#4e11ab] to-[#431e5e] bg-clip-text text-transparent mb-4">
+                Cryptex
+              </h1>
+              <p className="text-gray-300 text-lg">
+                Secure access to your multi-chain wallet
+              </p>
+            </div>
 
-          <button
-            type="button"
-            onClick={handleGoogleAuth}
-            disabled={isLoading}
-            className="w-full py-4 bg-white hover:bg-gray-100 text-gray-900 font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-3 disabled:opacity-50"
-          >
-            {isLoading ? (
-              <div className="flex items-center space-x-2">
-                <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                <span>Signing In...</span>
-              </div>
-            ) : (
-              <>
-                <Chrome className="h-5  w-5" />
-                <span>Continue with Google</span>
-              </>
-            )}
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={handleGoogleAuth}
+              disabled={isLoading}
+              className="w-full py-3.5 bg-white/90 hover:bg-white text-gray-900 font-medium rounded-xl transition-all duration-300 hover:scale-[1.02] flex items-center justify-center space-x-3 disabled:opacity-50 group"
+            >
+              {isLoading ? (
+                <div className="flex items-center space-x-2">
+                  <div className="w-5 h-5 border-2 border-gray-700 border-t-transparent rounded-full animate-spin"></div>
+                  <span>Authenticating...</span>
+                </div>
+              ) : (
+                <>
+                  <Chrome className="h-5 w-5 text-gray-700 group-hover:text-gray-900 transition-colors" />
+                  <span>Continue with Google</span>
+                </>
+              )}
+            </button>
+          </div>
 
-        <div className="mt-6 p-4 bg-gray-800/30 border border-gray-700 rounded-xl backdrop-blur-sm text-sm text-gray-300 flex items-center space-x-2">
-          <Lock className="h-4 w-4 text-purple-400" />
-          <span>Your login is secure and encrypted</span>
+          <div className="mt-6 p-4 bg-gray-800/40 border border-gray-700 rounded-xl backdrop-blur-sm text-sm text-gray-300 flex items-center justify-center space-x-2 hover:border-purple-500/50 transition-colors">
+            <div className="flex items-center space-x-2">
+              <Shield className="h-4 w-4 text-purple-400" />
+              <span>End-to-end encrypted security</span>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div className="w-full py-6 text-center text-gray-500 text-sm">
+        <p>By continuing, you agree to our Terms of Service and Privacy Policy</p>
       </div>
     </div>
   );

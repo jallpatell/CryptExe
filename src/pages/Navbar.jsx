@@ -49,8 +49,8 @@ export default function Navbar() {
                     <Link to="/" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Home</Link>
                     <Link to="/wallet" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Wallet</Link>
                     <Link to="/portfolio" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Portfolio</Link>
-                    <a href="https://github.com/jallpatell/CRYPTeX-secondary-" target='_blank' rel="noopener noreferrer" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Contribute</a>
                     <a href="#" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Settings</a>
+                    <a href="https://github.com/jallpatell/CRYPTeX-secondary-" target='_blank' rel="noopener noreferrer" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg"><img className='h-8' src='public/432516.webp'></img></a>
                     {isAuthenticated ? (
                         <button 
                             onClick={logout} 
