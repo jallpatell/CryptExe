@@ -28,7 +28,7 @@ export default function AuthPage() {
           <div className="bg-gray-900/50 backdrop-blur-lg border border-gray-700 rounded-2xl p-8 shadow-xl text-center hover:shadow-2xl transition-shadow duration-300">
             <div className="mb-8">
               <h1 className="text-5xl font-extrabold bg-gradient-to-r from-[#4e11ab] to-[#431e5e] bg-clip-text text-transparent mb-4">
-                Cryptex
+                CRYPTeX
               </h1>
               <p className="text-gray-300 text-lg">
                 Secure access to your multi-chain wallet
@@ -36,23 +36,23 @@ export default function AuthPage() {
             </div>
 
             <button
-              type="button"
-              onClick={handleGoogleAuth}
-              disabled={isLoading}
-              className="w-full py-3.5 bg-white/90 hover:bg-white text-gray-900 font-medium rounded-xl transition-all duration-300 hover:scale-[1.02] flex items-center justify-center space-x-3 disabled:opacity-50 group"
-            >
-              {isLoading ? (
-                <div className="flex items-center space-x-2">
-                  <div className="w-5 h-5 border-2 border-gray-700 border-t-transparent rounded-full animate-spin"></div>
-                  <span>Authenticating...</span>
-                </div>
-              ) : (
-                <>
-                  <Chrome className="h-5 w-5 text-gray-700 group-hover:text-gray-900 transition-colors" />
-                  <span>Continue with Google</span>
-                </>
-              )}
-            </button>
+  type="button"
+  onClick={handleGoogleAuth}
+  disabled={isLoading}
+  className="w-full py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 disabled:opacity-50 group backdrop-blur-sm"
+>
+  {isLoading ? (
+    <div className="flex items-center space-x-2">
+      <div className="w-5 h-5 border-2 border-white/50 border-t-white rounded-full animate-spin"></div>
+      <span>Authenticating...</span>
+    </div>
+  ) : (
+    <>
+      <Chrome className="h-5 w-5 text-white/80 group-hover:text-white transition-colors" />
+      <span>Authenticate with your Google Account</span>
+    </>
+  )}
+</button>
           </div>
 
           <div className="mt-6 p-4 bg-gray-800/40 border border-gray-700 rounded-xl backdrop-blur-sm text-sm text-gray-300 flex items-center justify-center space-x-2 hover:border-purple-500/50 transition-colors">
