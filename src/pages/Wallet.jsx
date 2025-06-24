@@ -24,49 +24,40 @@ export default function Wallet() {
 
   useEffect(() => {
     const loadWalletData = async () => {
-      if (loading) return;
+      if (loading || !user || !user.uid) return;
 
-      if (user && user.uid) {
-        try {
-          const userDocRef = doc(db, "userWallets", user.uid);
-          const docSnap = await getDoc(userDocRef);
+      try {
+        const userDocRef = doc(db, "userWallets", user.uid);
+        const docSnap = await getDoc(userDocRef);
 
-          if (docSnap.exists()) {
-            const data = docSnap.data();
-            let decryptedMnemonic = [];
-            if (data.encryptedMnemonic) {
-              try {
-                const bytes = CryptoJS.AES.decrypt(data.encryptedMnemonic, user.uid);
-                const originalText = bytes.toString(CryptoJS.enc.Utf8);
-                decryptedMnemonic = JSON.parse(originalText);
-              } catch (decryptError) {
-                console.error("Error decrypting mnemonic:", decryptError);
-              }
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          let decryptedMnemonic = [];
+          if (data.encryptedMnemonic) {
+            try {
+              const bytes = CryptoJS.AES.decrypt(data.encryptedMnemonic, user.uid);
+              const originalText = bytes.toString(CryptoJS.enc.Utf8);
+              decryptedMnemonic = JSON.parse(originalText);
+            } catch (decryptError) {
+              console.error("Error decrypting mnemonic:", decryptError);
             }
-            setMnemonic(decryptedMnemonic);
-            setEthAddresses(data.ethAddresses || []);
-            setSolPublicKeys(data.solPublicKeys ? data.solPublicKeys.map(pkStr => new PublicKey(pkStr)) : []);
-            setEthCurrentIndex(data.ethCurrentIndex || 0);
-            setSolCurrentIndex(data.solCurrentIndex || 0);
-            setSelectedChain(data.selectedChain || '');
-          } else {
-            setMnemonic([]);
-            setEthAddresses([]);
-            setSolPublicKeys([]);
-            setEthCurrentIndex(0);
-            setSolCurrentIndex(0);
-            setSelectedChain('');
           }
-        } catch (error) {
-          console.error("Error loading wallet data:", error);
+          setMnemonic(decryptedMnemonic);
+          setEthAddresses(data.ethAddresses || []);
+          setSolPublicKeys(data.solPublicKeys ? data.solPublicKeys.map(pkStr => new PublicKey(pkStr)) : []);
+          setEthCurrentIndex(data.ethCurrentIndex || 0);
+          setSolCurrentIndex(data.solCurrentIndex || 0);
+          setSelectedChain(data.selectedChain || '');
+        } else {
+          setMnemonic([]);
+          setEthAddresses([]);
+          setSolPublicKeys([]);
+          setEthCurrentIndex(0);
+          setSolCurrentIndex(0);
+          setSelectedChain('');
         }
-      } else {
-        setMnemonic([]);
-        setEthAddresses([]);
-        setSolPublicKeys([]);
-        setEthCurrentIndex(0);
-        setSolCurrentIndex(0);
-        setSelectedChain('');
+      } catch (error) {
+        console.error("Error loading wallet data:", error);
       }
     };
     loadWalletData();
@@ -108,6 +99,14 @@ export default function Wallet() {
       const mn = await bip39.generateMnemonic();
       const words = mn.split(" ");
       setMnemonic(words);
+
+      // Explicitly save mnemonic to Firestore immediately after generation
+      if (user && user.uid && !loading) {
+        const encryptedMnemonic = CryptoJS.AES.encrypt(JSON.stringify(words), user.uid).toString();
+        await setDoc(doc(db, "userWallets", user.uid), { encryptedMnemonic: encryptedMnemonic }, { merge: true });
+        console.log("Mnemonic saved to Firestore immediately after generation.");
+      }
+
     } catch (err) {
       console.error("Error generating mnemonic:", err);
     }
