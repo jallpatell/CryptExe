@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { db } from '../lib/firebase';
 import { doc, getDoc } from "firebase/firestore";
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 // Register ChartJS components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -148,11 +149,11 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6">
         <Navbar />
-      <div className="max-w-7xl mt-17 mx-auto">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#4e11ab] to-[#431e5e] bg-clip-text text-transparent mb-2">
+      <div className="flex-grow pt-28 px-4 pb-10">
+        <h1 className="text-5xl font-extrabold text-center bg-gradient-to-r from-[#4e11ab] to-[#431e5e] bg-clip-text text-transparent">
           Portfolio Overview
         </h1>
-        <p className="text-gray-400 mb-8">Track your assets across all protocols</p>
+        <p className="text-gray-300 mt-6 text-xl text-center max-w-2xl mx-auto mb-10">Track your assets across all protocols</p>
 
         {/* Chain and Key Selection - Now more natural and transparent */}
         <div className="flex flex-col sm:flex-row gap-3 mb-8">
@@ -286,6 +287,7 @@ export default function Portfolio() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }
