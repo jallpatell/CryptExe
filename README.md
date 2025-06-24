@@ -1,4 +1,4 @@
-# 💸 CRYPTeX
+# 🔗 CRYPTeX
 
 A modern, minimalistic crypto wallet frontend — **built with React, Firebase, and Web3 tools** — that doesn't just manage your tokens, it vibes with them.
 
@@ -112,13 +112,12 @@ vercel.json          # Deployment config
 ## 👨‍💻 Author
 
 **Jal Patel** — [@jallpatell](https://github.com/jallpatell)  
-> Built with too much coffee and not enough ETH.
+> Built with too much passion and not enough ETH.
 
 ---
 
 ## 📜 License
-
-MIT — Use it, fork it, improve it.
+Use it, fork it, improve it.
 
 ---
 
