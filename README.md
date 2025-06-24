@@ -94,6 +94,7 @@ vercel --prod
 ## 📁 Project Structure
 
 ```
+server/              # auths, middlewares and controllers
 src/
  ┣ components/       # UI elements
  ┣ pages/            # Page components
