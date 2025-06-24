@@ -28,6 +28,7 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    
     return ( 
         <nav 
             ref={navRef}
