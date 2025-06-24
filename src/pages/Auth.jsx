@@ -38,23 +38,24 @@ export default function AuthPage() {
             </div>
 
             <button
-  type="button"
-  onClick={handleGoogleAuth}
-  disabled={isLoading}
-  className="w-full py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 disabled:opacity-50 group backdrop-blur-sm"
->
-  {isLoading ? (
-    <div className="flex items-center space-x-2">
-      <div className="w-5 h-5 border-2 border-white/50 border-t-white rounded-full animate-spin"></div>
-      <span>Authenticating...</span>
-    </div>
-  ) : (
-    <>
-      <Chrome className="h-5 w-5 text-white/80 group-hover:text-white transition-colors" />
-      <span>Authenticate with your Google Account</span>
-    </>
-  )}
-</button>
+                type="button"
+                onClick={handleGoogleAuth}
+                disabled={isLoading}
+                className="w-full py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 disabled:opacity-50 group backdrop-blur-sm"
+              >
+                {isLoading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-5 h-5 border-2 border-white/50 border-t-white rounded-full animate-spin"></div>
+                    <span>Authenticating...</span>
+                  </div>
+                ) : (
+                  <>
+
+                    <img src="/google_logo.jpeg" className="h-[35px] w-auto rounded-lg" alt="Google logo" />
+                    <span> Authenticate with your Google Account</span>
+                  </>
+                )}
+            </button>
           </div>
 
           <div className="mt-6 p-4 bg-gray-800/40 border border-gray-700 rounded-xl backdrop-blur-sm text-sm text-gray-300 flex items-center justify-center space-x-2 hover:border-purple-500/50 transition-colors">
