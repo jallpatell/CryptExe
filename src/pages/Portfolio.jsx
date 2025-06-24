@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, PieChart, Wallet, HardDrive, BarChart2 } from 'lucide-react';
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import Navbar from './Navbar';
+
+// Register ChartJS components
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Portfolio() {
   const [selectedChain, setSelectedChain] = useState('');
   const [selectedKey, setSelectedKey] = useState('');
   const [portfolioData, setPortfolioData] = useState(null);
 
-  // Mock data - replace with your actual data fetching logic
+  // Mock data
   const mockPortfolioData = {
     eth: {
       '0x123...abc': {
@@ -16,14 +22,6 @@ export default function Portfolio() {
           'Aave v3': 35.8,
           'KelpDAO': 12.5,
           NFTs: 9.4
-        }
-      },
-      '0x456...def': {
-        networth: 1842.31,
-        protocols: {
-          wallet: 28.7,
-          'Aave v3': 58.1,
-          NFTs: 13.2
         }
       }
     },
@@ -35,14 +33,6 @@ export default function Portfolio() {
           'Marinade': 42.7,
           'Jito': 18.4,
           NFTs: 7.7
-        }
-      },
-      '6tgf...456': {
-        networth: 892.45,
-        protocols: {
-          wallet: 68.3,
-          'Marinade': 22.1,
-          NFTs: 9.6
         }
       }
     }
@@ -56,13 +46,78 @@ export default function Portfolio() {
     }
   }, [selectedChain, selectedKey]);
 
+  // Prepare data for donut chart
+  const getChartData = () => {
+    if (!portfolioData) return null;
+    
+    const protocolNames = Object.keys(portfolioData.protocols);
+    const protocolValues = Object.values(portfolioData.protocols);
+    const colors = [
+      'rgba(78, 17, 171, 0.8)',  // Purple
+      'rgba(125, 71, 221, 0.8)',  // Lighter purple
+      'rgba(67, 30, 94, 0.8)',    // Dark purple
+      'rgba(156, 39, 176, 0.8)',  // Pinkish purple
+      'rgba(103, 58, 183, 0.8)'   // Medium purple
+    ];
+
+    return {
+      labels: protocolNames,
+      datasets: [{
+        data: protocolValues,
+        backgroundColor: colors.slice(0, protocolNames.length),
+        borderColor: 'rgba(30, 30, 30, 0.3)',
+        borderWidth: 1,
+        cutout: '70%',
+        radius: '90%'
+      }]
+    };
+  };
+
+  const chartOptions = {
+    plugins: {
+      legend: {
+        position: 'right',
+        labels: {
+          color: '#E2E8F0',
+          font: {
+            size: 12
+          },
+          padding: 20,
+          usePointStyle: true,
+          pointStyle: 'circle'
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const label = context.label || '';
+            const value = context.raw || 0;
+            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+            const percentage = Math.round((value / total) * 100);
+            return `${label}: ${percentage}% ($${((portfolioData.networth * value) / 100).toFixed(2)})`;
+          }
+        },
+        displayColors: true,
+        backgroundColor: 'rgba(30, 30, 30, 0.9)',
+        titleColor: '#E2E8F0',
+        bodyColor: '#E2E8F0',
+        borderColor: 'rgba(78, 17, 171, 0.5)',
+        borderWidth: 1,
+        padding: 12,
+        cornerRadius: 8
+      }
+    },
+    maintainAspectRatio: false
+  };
+
   const protocolEntries = portfolioData 
     ? Object.entries(portfolioData.protocols).sort((a, b) => b[1] - a[1])
     : [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6">
-      <div className="max-w-7xl mx-auto">
+        <Navbar />
+      <div className="max-w-7xl mt-17 mx-auto">
         <h1 className="text-4xl font-bold bg-gradient-to-r from-[#4e11ab] to-[#431e5e] bg-clip-text text-transparent mb-2">
           Portfolio Overview
         </h1>
@@ -127,11 +182,20 @@ export default function Portfolio() {
                   <PieChart className="text-purple-400 mr-2" />
                   <h3 className="text-xl font-semibold">Protocol Allocation</h3>
                 </div>
-                <div className="h-40 flex items-center justify-center">
-                  {/* Placeholder for pie chart - replace with your chart library */}
-                  <div className="text-gray-400 text-center">
-                    <HardDrive className="mx-auto mb-2" size={24} />
-                    Pie Chart Visualization
+                <div className="h-64 relative">
+                  {getChartData() && (
+                    <Doughnut 
+                      data={getChartData()} 
+                      options={chartOptions}
+                    />
+                  )}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold">
+                        ${portfolioData.networth.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                      </div>
+                      <div className="text-xs text-gray-400">Total Value</div>
+                    </div>
                   </div>
                 </div>
               </div>

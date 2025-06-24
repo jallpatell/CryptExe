@@ -55,7 +55,11 @@ export default function Navbar() {
                     </a>
                     {isAuthenticated ? (
                         <button 
-                            onClick={logout} 
+                            onClick={() => {
+                                if (window.confirm('Are you sure you want to log out?')) {
+                                    logout();
+                                }
+                            }} 
                             className="px-4 py-2 text-lg font-medium text-purple-100 bg-white/5 rounded-lg hover:bg-white/10 hover:text-white transition-all duration-200 border border-white/10 hover:border-white/20"
                         >
                             Logout
