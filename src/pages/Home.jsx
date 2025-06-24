@@ -18,13 +18,13 @@ export default function CryptexLanding() {
         <div className="text-center space-y-20">
           
           
-          <h1 className="text-5xl mt-30 md:text-7xl font-bold bg-gradient-to-r from-[#4e11ab] via-[#4e11ab] to-[#4e11ab] bg-clip-text text-transparent leading-tight transition duration-300 ease-in-out hover:brightness-150">
+          <h1 className="text-5xl mt-30 md:text-7xl font-bold bg-gradient-to-r from-[#4e11ab] via-[#4e11ab] to-[#4e11ab] bg-clip-text text-transparent leading-tight transition duration-300 ease-in-out hover:brightness-130">
               Your Gateway to the<br />
-              <span className="bg-gradient-to-r from-[#4e11ab] via-[#4e11ab] to-[#4e11ab] bg-clip-text text-transparent transition duration-300 ease-in-out hover:brightness-110">
+              <span className="bg-gradient-to-r from-[#4e11ab] via-[#4e11ab] to-[#4e11ab] bg-clip-text text-transparent transition duration-300 ease-in-out hover:brightness-100">
                 Decentralized Web
               </span>
           </h1>
-          
+
           <Badge variant="secondary" className="bg-purple-900/50 text-purple-300 border-#8f4ff0 font-bold px-3 py-1.5">
             🚀 Now Supporting Ethereum & Solana
           </Badge>
