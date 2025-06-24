@@ -49,8 +49,9 @@ export default function Navbar() {
                     <Link to="/" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Home</Link>
                     <Link to="/wallet" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Wallet</Link>
                     <Link to="/portfolio" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Portfolio</Link>
+                    <Link to="/transactions" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Transactions</Link>
 
-                    <a href='https://github.com/jallpatell' target='_blank' rel='noopener noreferrer' className="p-2 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300">
+                    <a href='https://github.com/jallpatell/CRYPTeX-secondary-' target='_blank' rel='noopener noreferrer' className="p-2 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300">
                         <img className='h-8' src='/432516.webp'></img>
                     </a>
                     {isAuthenticated ? (
