@@ -6,6 +6,8 @@ import Wallet from './pages/Wallet'
 import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
 import AuthPage from './pages/Auth'
+import { Transaction } from 'ethers'
+import Transactions from './pages/Transations'
 
 export default function App() {
   return (
@@ -27,7 +29,15 @@ export default function App() {
             path="/portfolio"
             element={
               <PrivateRoute>
-                <Portfolio />
+              <Portfolio />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/transactions"
+            element={
+              <PrivateRoute>
+              <Transactions />
               </PrivateRoute>
             }
           />
