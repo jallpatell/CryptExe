@@ -3,6 +3,7 @@ import { Chrome, Lock, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../lib/firebase';
+import Navbar from './Navbar';
 
 export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +24,7 @@ export default function AuthPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col items-center justify-center px-4 text-white">
+      <Navbar />
       <div className="flex-grow flex items-center justify-center w-full">
         <div className="w-full max-w-md">
           <div className="bg-gray-900/50 backdrop-blur-lg border border-gray-700 rounded-2xl p-8 shadow-xl text-center hover:shadow-2xl transition-shadow duration-300">

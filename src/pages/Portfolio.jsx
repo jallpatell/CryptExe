@@ -2,62 +2,93 @@ import { useState, useEffect } from 'react';
 import { ChevronDown, PieChart, Wallet, HardDrive, BarChart2 } from 'lucide-react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useAuth } from '../context/AuthContext';
+import { db } from '../lib/firebase';
+import { doc, getDoc } from "firebase/firestore";
 import Navbar from './Navbar';
 
 // Register ChartJS components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Portfolio() {
+  const { user } = useAuth();
   const [selectedChain, setSelectedChain] = useState('');
   const [selectedKey, setSelectedKey] = useState('');
   const [portfolioData, setPortfolioData] = useState(null);
+  const [walletData, setWalletData] = useState({ ethAddresses: [], solPublicKeys: [] });
 
-  // Mock data
-  const mockPortfolioData = {
-    eth: {
-      '0x123...abc': {
-        networth: 2845.67,
-        protocols: {
-          wallet: 42.3,
-          'Aave v3': 35.8,
-          'KelpDAO': 12.5,
-          NFTs: 9.4
+  // Fetch user's actual wallet data from Firestore
+  useEffect(() => {
+    const fetchWalletData = async () => {
+      if (user?.uid) {
+        const docRef = doc(db, "userWallets", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setWalletData({
+            ethAddresses: data.ethAddresses || [],
+            solPublicKeys: (data.solPublicKeys || []).map(pk => typeof pk === 'string' ? pk : pk.toBase58())
+          });
         }
       }
-    },
-    sol: {
-      '8yhg...123': {
-        networth: 5231.89,
-        protocols: {
-          wallet: 31.2,
-          'Marinade': 42.7,
-          'Jito': 18.4,
-          NFTs: 7.7
-        }
+    };
+    fetchWalletData();
+  }, [user]);
+
+  // Mock portfolio data - replace with your actual data fetching logic
+  const mockPortfolioData = (address) => {
+    const randomNetworth = Math.random() * 5000 + 500;
+    const protocols = {
+      eth: {
+        wallet: Math.random() * 30 + 20,
+        'Aave v3': Math.random() * 40 + 20,
+        'KelpDAO': Math.random() * 20 + 5,
+        NFTs: Math.random() * 15 + 5
+      },
+      sol: {
+        wallet: Math.random() * 30 + 20,
+        'Marinade': Math.random() * 40 + 20,
+        'Jito': Math.random() * 20 + 5,
+        NFTs: Math.random() * 15 + 5
       }
-    }
+    };
+
+    // Normalize percentages to sum to 100
+    const protocolValues = Object.values(protocols[selectedChain]);
+    const sum = protocolValues.reduce((a, b) => a + b, 0);
+    const normalizedProtocols = {};
+    Object.keys(protocols[selectedChain]).forEach((key, i) => {
+      normalizedProtocols[key] = Math.round((protocolValues[i] / sum) * 10000) / 100;
+    });
+
+    return {
+      networth: randomNetworth,
+      protocols: normalizedProtocols
+    };
   };
 
   useEffect(() => {
     if (selectedChain && selectedKey) {
-      setPortfolioData(mockPortfolioData[selectedChain][selectedKey]);
+      setPortfolioData(mockPortfolioData(selectedKey));
     } else {
       setPortfolioData(null);
     }
   }, [selectedChain, selectedKey]);
 
-  // Prepare data for donut chart
+  // Prepare data for donut chart with vibrant colors
   const getChartData = () => {
     if (!portfolioData) return null;
     
     const protocolNames = Object.keys(portfolioData.protocols);
     const protocolValues = Object.values(portfolioData.protocols);
+    
+    // Vibrant color palette
     const colors = [
-      'rgba(78, 17, 171, 0.8)',  // Purple
-      'rgba(125, 71, 221, 0.8)',  // Lighter purple
-      'rgba(67, 30, 94, 0.8)',    // Dark purple
-      'rgba(156, 39, 176, 0.8)',  // Pinkish purple
-      'rgba(103, 58, 183, 0.8)'   // Medium purple
+      'rgba(138, 43, 226, 0.9)',  // Blue violet
+      'rgba(75, 0, 130, 0.9)',    // Indigo
+      'rgba(148, 0, 211, 0.9)',   // Dark violet
+      'rgba(123, 104, 238, 0.9)', // Medium slate blue
+      'rgba(186, 85, 211, 0.9)'   // Medium orchid
     ];
 
     return {
@@ -65,7 +96,7 @@ export default function Portfolio() {
       datasets: [{
         data: protocolValues,
         backgroundColor: colors.slice(0, protocolNames.length),
-        borderColor: 'rgba(30, 30, 30, 0.3)',
+        borderColor: 'rgba(20, 20, 20, 0.5)',
         borderWidth: 1,
         cutout: '70%',
         radius: '90%'
@@ -101,7 +132,7 @@ export default function Portfolio() {
         backgroundColor: 'rgba(30, 30, 30, 0.9)',
         titleColor: '#E2E8F0',
         bodyColor: '#E2E8F0',
-        borderColor: 'rgba(78, 17, 171, 0.5)',
+        borderColor: 'rgba(138, 43, 226, 0.5)',
         borderWidth: 1,
         padding: 12,
         cornerRadius: 8
@@ -123,8 +154,8 @@ export default function Portfolio() {
         </h1>
         <p className="text-gray-400 mb-8">Track your assets across all protocols</p>
 
-        {/* Chain and Key Selection */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+        {/* Chain and Key Selection - Now more natural and transparent */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-8">
           <div className="relative flex-1">
             <select
               value={selectedChain}
@@ -132,13 +163,13 @@ export default function Portfolio() {
                 setSelectedChain(e.target.value);
                 setSelectedKey('');
               }}
-              className="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl py-3 pl-4 pr-10 appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 hover:border-gray-600 transition-colors"
+              className="w-full bg-gray-800/30 backdrop-blur-sm border border-gray-600/50 rounded-lg py-2 pl-3 pr-8 appearance-none focus:outline-none focus:ring-1 focus:ring-purple-400 hover:border-gray-500 transition-colors text-sm"
             >
               <option value="">Select Chain</option>
               <option value="eth">Ethereum</option>
               <option value="sol">Solana</option>
             </select>
-            <ChevronDown className="absolute right-3 top-3.5 text-gray-400" size={18} />
+            <ChevronDown className="absolute right-2 top-2.5 text-gray-400" size={16} />
           </div>
 
           <div className="relative flex-1">
@@ -146,17 +177,21 @@ export default function Portfolio() {
               value={selectedKey}
               onChange={(e) => setSelectedKey(e.target.value)}
               disabled={!selectedChain}
-              className={`w-full bg-gray-900/50 backdrop-blur-sm border ${selectedChain ? 'border-gray-700 hover:border-gray-600' : 'border-gray-800 cursor-not-allowed'} rounded-xl py-3 pl-4 pr-10 appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors`}
+              className={`w-full bg-gray-800/30 backdrop-blur-sm border ${selectedChain ? 'border-gray-600/50 hover:border-gray-500' : 'border-gray-700/50 cursor-not-allowed'} rounded-lg py-2 pl-3 pr-8 appearance-none focus:outline-none focus:ring-1 focus:ring-purple-400 transition-colors text-sm`}
             >
               <option value="">Select Wallet</option>
-              {selectedChain && Object.keys(mockPortfolioData[selectedChain]).map((key) => (
-                <option key={key} value={key}>{key}</option>
+              {selectedChain === 'eth' && walletData.ethAddresses.map((address) => (
+                <option key={address} value={address}>{address.slice(0, 6)}...{address.slice(-4)}</option>
+              ))}
+              {selectedChain === 'sol' && walletData.solPublicKeys.map((pubKey) => (
+                <option key={pubKey} value={pubKey}>{pubKey.slice(0, 6)}...{pubKey.slice(-4)}</option>
               ))}
             </select>
-            <ChevronDown className="absolute right-3 top-3.5 text-gray-400" size={18} />
+            <ChevronDown className="absolute right-2 top-2.5 text-gray-400" size={16} />
           </div>
         </div>
 
+        {/* Rest of the component remains the same */}
         {portfolioData ? (
           <>
             {/* Networth and Protocol Allocation */}
