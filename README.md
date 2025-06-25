@@ -14,6 +14,17 @@ A modern, minimalistic crypto wallet frontend — **built with React, Firebase, 
 - ⚙️ **Typed & Tooled** — Built with TypeScript, ESLint, and Vite for the modern stack.
 - 🔒 **Seed Phrase Generation** — using `bip39`, `ed25519-hd-key`, and `@scure/bip32`.
 
+
+
+#### 💼 Portfolio Overview
+![Portfolio Overview]([/portfolio-overview.png](https://github.com/jallpatell/CRYPTeX-secondary-/blob/main/public/Screenshot%202025-06-25%20at%2013.10.04.png))
+
+#### 📊 Wallet Analytics
+![Wallet Analytics](/wallet-analytics.png)
+
+#### 🔄 Transaction History
+![Transaction History](/transaction-history.png)
+
 ---
 
 ## 🧱 Tech Stack
