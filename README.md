@@ -21,9 +21,6 @@ A modern, minimalistic crypto wallet frontend — **built with React, Firebase, 
 #### 💼 Portfolio Overview
 ![Portfolio Overview](/portfolio-overview.png)
 
-#### 📊 Wallet Analytics
-![Wallet Analytics](/wallet-analytics.png)
-
 #### 🔄 Transaction History
 ![Transaction History](/transaction-history.png)
 
