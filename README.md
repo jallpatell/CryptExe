@@ -19,10 +19,10 @@ A modern, minimalistic crypto wallet frontend — **built with React, Firebase, 
 ### 📸 Screenshots
 
 #### 💼 Portfolio Overview
-![Portfolio Overview](/portfolio-overview.png)
+![Portfolio Overview](/public/portfolio-overview.png)
 
 #### 🔄 Transaction History
-![Transaction History](/transaction-history.png)
+![Transaction History](/public/transaction-history.png)
 
 ---
 
