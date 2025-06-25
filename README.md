@@ -23,7 +23,7 @@ A modern, minimalistic crypto wallet frontend — **built with React, Firebase, 
 ![Wallet Analytics](/wallet-analytics.png)
 
 #### 🔄 Transaction History
-![Transaction History](/transaction-history.png)
+![Transaction History](/transaction-history.png](https://github.com/jallpatell/CRYPTeX-secondary-/blob/main/public/Screenshot%202025-06-25%20at%2013.07.43.png))
 
 ---
 
