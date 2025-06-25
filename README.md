@@ -16,14 +16,16 @@ A modern, minimalistic crypto wallet frontend — **built with React, Firebase, 
 
 
 
+### 📸 Screenshots
+
 #### 💼 Portfolio Overview
-![Portfolio Overview](public/Screenshot 2025-06-25 at 13.10.04.png)
+![Portfolio Overview](/portfolio-overview.png)
 
 #### 📊 Wallet Analytics
 ![Wallet Analytics](/wallet-analytics.png)
 
 #### 🔄 Transaction History
-![Transaction History](/transaction-history.png](https://github.com/jallpatell/CRYPTeX-secondary-/blob/main/public/Screenshot%202025-06-25%20at%2013.07.43.png))
+![Transaction History](/transaction-history.png)
 
 ---
 
