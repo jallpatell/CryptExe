@@ -3,12 +3,14 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Shield, Zap, Globe, Lock, Smartphone, ArrowRight, Check, Star, Users, TrendingUp } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 
 import Navbar from './Navbar';
 import Footer from './Footer';
 
 export default function CryptexLanding() {
+  const { login } = useAuth();
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-y-auto overflow-x-hidden">
       {/* Navigation */}
@@ -35,7 +37,7 @@ export default function CryptexLanding() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-10 justify-center items-center pt-8">
-            <Button size="lg" className="bg-gradient-to-r from-[#4e11ab] to-[#4e11ab] hover:from-[#210748] hover:to-[#773bb3] text-lg px-8 py-4">
+            <Button size="lg" onClick={login} className="bg-gradient-to-r from-[#4e11ab] to-[#4e11ab] hover:from-[#210748] hover:to-[#773bb3] text-lg px-8 py-4">
               Get Started Free
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
