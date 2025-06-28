@@ -69,102 +69,130 @@ export default function CryptexLanding() {
             Built for power users and beginners alike, with enterprise-grade security and consumer-friendly design.
           </p>
         </div>
+
+
+        <div className="grid grid-cols-3 gap-6">
+  {/* Row 1 */}
+  <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105 h-full">
+    <CardHeader className="flex flex-col items-start gap-4 h-full">
+      <div className="w-12 h-12 bg-gradient-to-r from-[#f5424e] to-[#f5424e] rounded-lg flex items-center justify-center">
+        <Lock className="h-6 w-6" />
+      </div>
+      <div>
+        <CardTitle className="text-white">Google Account Integration</CardTitle>
+        <CardDescription>
+          Securely connect your wallet to your Google account for easy access and recovery.
+        </CardDescription>
+      </div>
+    </CardHeader>
+  </Card>
+  
+  <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105 h-full">
+    <CardHeader className="flex flex-col items-start gap-4 h-full">
+      <div className="w-12 h-12 bg-gradient-to-r from-[#5a9cde] to-[#5a9cde] rounded-lg flex items-center justify-center">
+        <Zap className="h-6 w-6" />
+      </div>
+      <div>
+        <CardTitle className="text-white">Lightning Fast</CardTitle>
+        <CardDescription>
+          Execute transactions in seconds across networks with optimized gas fees and MEV protection.
+        </CardDescription>
+      </div>
+    </CardHeader>
+  </Card>
+  
+  <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105 h-full">
+    <CardHeader className="flex flex-col items-start gap-4 h-full">
+      <div className="w-12 h-12 bg-gradient-to-r from-[#8de18d] to-[#8de18d] rounded-lg flex items-center justify-center">
+        <Globe className="h-6 w-6" />
+      </div>
+      <div>
+        <CardTitle className="text-white">Multi-Chain Native</CardTitle>
+        <CardDescription>
+          Seamlessly switch between Ethereum and Solana ecosystems. Trade and interact with DApps.
+        </CardDescription>
+      </div>
+    </CardHeader>
+  </Card>
+
+  {/* Row 2 */}
+  <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105 h-full">
+    <CardHeader className="flex flex-col items-start gap-4 h-full">
+      <div className="w-12 h-12 bg-gradient-to-r from-[#d97dd2] to-[#d97dd2] rounded-lg flex items-center justify-center">
+        <Lock className="h-6 w-6" />
+      </div>
+      <div>
+        <CardTitle className="text-white">Non-Custodial</CardTitle>
+        <CardDescription>
+          You own your keys, you own your crypto. No third parties, no middlemen.
+        </CardDescription>
+      </div>
+    </CardHeader>
+  </Card>
+  
+  <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105 h-full">
+    <CardHeader className="flex flex-col items-start gap-4 h-full">
+      <div className="w-12 h-12 bg-gradient-to-r from-[#34d5d3] to-[#34d5d3] rounded-lg flex items-center justify-center">
+        <Smartphone className="h-6 w-6" />
+      </div>
+      <div>
+        <CardTitle className="text-white">Cross-Platform</CardTitle>
+        <CardDescription>
+          Available on desktop, mobile, and browser extension. Syncs across all devices.
+        </CardDescription>
+      </div>
+    </CardHeader>
+  </Card>
+
+  <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105 h-full">
+    <CardHeader className="flex flex-col items-start gap-4 h-full">
+      <div className="w-12 h-12 bg-gradient-to-r from-[#f5b507] to-[#f5b507] rounded-lg flex items-center justify-center">
+        <Zap className="h-6 w-6" />
+      </div>
+      <div>
+        <CardTitle className="text-white">How It Works</CardTitle>
+        <CardDescription>
+          <ol className="list-decimal list-inside space-y-1 text-left">
+            <li>Login with Google</li>
+            <li>Create seed phrase</li>
+            <li>Select network</li>
+            <li>Start transacting</li>
+          </ol>
+        </CardDescription>
+      </div>
+    </CardHeader>
+  </Card>
+</div>
+
+
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="bg-gray-900/50 border-gray-800/50 w-70 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
-            <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-[#dc3d3d] to-[#dc3d3d] rounded-lg flex items-center justify-center mb-4">
-                <Shield className="h-6 w-6" />
-              </div>
-              <CardTitle className="text-white">Military-Grade Security</CardTitle>
-              <CardDescription>
-                Your private keys never leave your device. Multi-layer encryption and biometric protection keep your assets safe.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-          
-          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
-            <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-[#5a9cde] to-[#5a9cde] rounded-lg flex items-center justify-center mb-4">
-                <Zap className="h-6 w-6" />
-              </div>
-              <CardTitle className="text-white">Lightning Fast</CardTitle>
-              <CardDescription>
-                Execute transactions in seconds across Ethereum and Solana networks with optimized gas fees and MEV protection.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-          
-          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
-            <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-[#8de18d] to-[#8de18d] rounded-lg flex items-center justify-center mb-4">
-                <Globe className="h-6 w-6" />
-              </div>
-              <CardTitle className="text-white">Multi-Chain Native</CardTitle>
-              <CardDescription>
-                Seamlessly switch between Ethereum and Solana ecosystems. Trade, stake, and interact with DApps across chains.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-          
-          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
-            <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-[#d97dd2] to-[#d97dd2] rounded-lg flex items-center justify-center mb-4">
-                <Lock className="h-6 w-6" />
-              </div>
-              <CardTitle className="text-white">Non-Custodial</CardTitle>
-              <CardDescription>
-                You own your keys, you own your crypto. No third parties, no middlemen, no compromises on your financial sovereignty.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-          
-          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
-            <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-[#34d5d3] to-[#34d5d3] rounded-lg flex items-center justify-center mb-4">
-                <Smartphone className="h-6 w-6" />
-              </div>
-              <CardTitle className="text-white">Cross-Platform</CardTitle>
-              <CardDescription>
-                Available on desktop, mobile, and as a browser extension. Your wallet syncs securely across all your devices.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-          
-          <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105">
-            <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-[#efefef] to-[#efefef] rounded-lg flex items-center justify-center mb-4">
-                <TrendingUp className="h-6 w-6" />
-              </div>
-              <CardTitle className="text-white">Advanced Trading</CardTitle>
-              <CardDescription>
-                Built-in DEX aggregation, limit orders, and portfolio tracking. Professional trading tools in a simple interface.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        </div>
       </section>
 
+      
+
       {/* Supported Networks */}
-      <section className="flex-grow max-w-7xl mx-auto px-6 py-20">
-        <Card className="bg-gray-900/50 border-gray-800/50 hover:border-gray-600/50 transition-all duration-300 hover:scale-105">
-          <CardContent className="p-20">
-            <div className="text-center mb-12">
-              <h2 className="text-5xl font-extrabold bg-gradient-to-r text-white leading-tight"
-              >Multi-Chain by Design</h2>
-              <p className="text-3xl text-gray-300">
-                Access the best of both worlds with native support for Ethereum and Solana ecosystems
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="text-center space-y-6">
-                <div className="w-25  h-25 bg-transparent rounded-full flex items-center justify-center mx-auto">
-                  <img src='/eth_logo.webp' className='hover:shadow-[0px_0px_60px_0px_rgba(140,46,255,1)]'></img>
-                </div>
-                <h3 className="text-2xl text-white font-bold">Ethereum Network</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-center justify-center space-x-2">
+      <section className="flex-grow max-w-7xl mx-auto px-6 py-16"> {/* Reduced py-20 to py-16 */}
+  <Card className="bg-gray-900/50 border-gray-800/50 hover:border-gray-600/50 transition-all duration-300 hover:scale-105">
+    <CardContent className="p-16"> {/* Reduced p-20 to p-16 */}
+      <div className="text-center mb-9"> {/* Reduced mb-12 to mb-9 */}
+        <h2 className="text-4xl font-extrabold bg-gradient-to-r text-white leading-tight"> {/* Reduced text-5xl to text-4xl */}
+          Multi-Chain by Design
+        </h2>
+        <p className="text-2xl text-gray-300"> {/* Reduced text-3xl to text-2xl */}
+          Access the best of both worlds with native support for Ethereum and Solana ecosystems
+        </p>
+      </div>
+      
+      <div className="grid md:grid-cols-2 gap-9"> {/* Reduced gap-12 to gap-9 */}
+        <div className="text-center space-y-4"> {/* Reduced space-y-6 to space-y-4 */}
+          <div className="w-20 h-20 bg-transparent rounded-full flex items-center justify-center mx-auto"> {/* Reduced w-25/h-25 to w-20/h-20 */}
+            <img src='/eth_logo.webp' className='hover:shadow-[0px_0px_45px_0px_rgba(140,46,255,0.8)]' /> {/* Reduced shadow size and intensity */}
+          </div>
+          <h3 className="text-xl text-white font-bold"> {/* Reduced text-2xl to text-xl */}
+            Ethereum Network
+          </h3>
+          <ul className="space-y-2 text-gray-300"> {/* Reduced space-y-3 to space-y-2 */}
+          <li className="flex items-center justify-center space-x-2">
                     <Check className="h-5 w-5 text-green-400" />
                     <span>ERC-20 Tokens</span>
                   </li>
@@ -180,16 +208,19 @@ export default function CryptexLanding() {
                     <Check className="h-5 w-5 text-green-400" />
                     <span>Layer 2 Solutions</span>
                   </li>
-                </ul>
-              </div>
-              
-              <div className="text-center space-y-6">
-                <div className="w-25  h-25 bg-transparent rounded-full flex items-center justify-center mx-auto">
-                  <img src='/sol_logo.jpg' className='hover:shadow-[0px_0px_60px_0px_rgba(140,46,255,1)]'></img>
-                </div>
-                <h3 className="text-2xl text-white font-bold">Solana Network</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-center justify-center space-x-2">
+            {/* Other list items with same adjustments */}
+          </ul>
+        </div>
+        
+        <div className="text-center space-y-4"> {/* Same reductions as first column */}
+          <div className="w-20 h-20 bg-transparent rounded-full flex items-center justify-center mx-auto">
+            <img src='/sol_logo.jpg' className='hover:shadow-[0px_0px_45px_0px_rgba(140,46,255,0.8)]' />
+          </div>
+          <h3 className="text-xl text-white font-bold">
+            Solana Network
+          </h3>
+          <ul className="space-y-2 text-gray-300">
+          <li className="flex items-center justify-center space-x-2">
                     <Check className="h-5 w-5 text-green-400" />
                     <span>SPL Tokens</span>
                   </li>
@@ -205,12 +236,13 @@ export default function CryptexLanding() {
                     <Check className="h-5 w-5 text-green-400" />
                     <span>Low Transaction Fees</span>
                   </li>
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
+            {/* Other list items with same adjustments */}
+          </ul>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+</section>
 
       {/* CTA Section */}
       <section className="flex-grow max-w-7xl mx-auto px-6 py-20">
