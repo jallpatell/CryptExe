@@ -35,7 +35,7 @@ export default function CryptexLanding() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-10 justify-center items-center pt-8">
-            <Button size="lg" className="bg-gradient-to-r from-[#4e11ab] to-[#4e11ab] hover:from-[#210748] hover:to-[#773bb3] text-lg px-8 py-4">
+            <Button size="lg" onClick={() => window.open("crypt-exe.vercel.app", "_blank")} className="bg-gradient-to-r from-[#4e11ab] to-[#4e11ab] hover:from-[#210748] hover:to-[#773bb3] text-lg px-8 py-4">
               Get Started Free
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
@@ -253,17 +253,15 @@ export default function CryptexLanding() {
               Join hundreds of thousands of users who trust CRYPTeX with their digital assets. 
               Your journey into DeFi starts here.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="bg-gray-800 text-white font-extrabold hover:border-[#4e11ab] hover:border-2 hover:bg-white hover:text-black text-lg px-8 py-4">
-                Join for Free
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+          </CardContent>
+        </Card>
+
+
+        <div className="flex flex-col mt-10 sm:flex-row gap-4 justify-center">
               <Button size="lg" variant="outline" onClick={() => window.open('https://github.com/jallpatell', '_blank')} className="bg-gray-800 text-white font-extrabold hover:border-[#4e11ab] hover:border-2 hover:bg-white hover:text-black text-lg px-8 py-4">
                 About Me
               </Button>
             </div>
-          </CardContent>
-        </Card>
       </section>
 
       {/* Footer */}
