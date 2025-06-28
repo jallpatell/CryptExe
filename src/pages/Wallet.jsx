@@ -12,21 +12,31 @@ import CryptoJS from 'crypto-js';
 import { PublicKey } from "@solana/web3.js";
 
 export default function Wallet() {
-  const { isAuthenticated, user, loading } = useAuth();
+  const { isAuthenticated, user, loading: authLoading } = useAuth();
 
-  const [mnemonic, setMnemonic] = useState([]);
+  const [mnemonic, setMnemonic] = useState(null);
   const [isMnemonicVisible, setIsMnemonicVisible] = useState(false);
   const [selectedChain, setSelectedChain] = useState('');
-  const [ethAddresses, setEthAddresses] = useState([]);
-  const [solPublicKeys, setSolPublicKeys] = useState([]);
+  const [ethAddresses, setEthAddresses] = useState(null);
+  const [solPublicKeys, setSolPublicKeys] = useState(null);
   const [ethCurrentIndex, setEthCurrentIndex] = useState(0);
   const [solCurrentIndex, setSolCurrentIndex] = useState(0);
+  const [walletLoading, setWalletLoading] = useState(true);
 
   useEffect(() => {
     const loadWalletData = async () => {
-      if (loading || !user || !user.uid) return;
+      console.log("AuthContext status in Wallet.jsx - Loading:", authLoading, "User:", user);
+      if (authLoading || !user || !user.uid) {
+        console.log("Skipping loadWalletData: authLoading is true or user is not available.", { authLoading, user });
+        setMnemonic(null);
+        setEthAddresses(null);
+        setSolPublicKeys(null);
+        setWalletLoading(true);
+        return;
+      }
 
       try {
+        console.log("Attempting to load wallet data for user:", user.uid);
         const userDocRef = doc(db, "userWallets", user.uid);
         const docSnap = await getDoc(userDocRef);
 
@@ -40,6 +50,7 @@ export default function Wallet() {
               decryptedMnemonic = JSON.parse(originalText);
             } catch (decryptError) {
               console.error("Error decrypting mnemonic:", decryptError);
+              decryptedMnemonic = [];
             }
           }
           setMnemonic(decryptedMnemonic);
@@ -58,14 +69,24 @@ export default function Wallet() {
         }
       } catch (error) {
         console.error("Error loading wallet data:", error);
+        setMnemonic([]);
+        setEthAddresses([]);
+        setSolPublicKeys([]);
+        setEthCurrentIndex(0);
+        setSolCurrentIndex(0);
+        setSelectedChain('');
+      } finally {
+        setWalletLoading(false);
       }
     };
+    setWalletLoading(true);
     loadWalletData();
-  }, [user, loading]);
+  }, [user, authLoading]);
 
   useEffect(() => {
     const saveWalletData = async () => {
-      if (user && user.uid && !loading) {
+      console.log("Attempting to save wallet data...");
+      if (user && user.uid && !authLoading && mnemonic !== null && ethAddresses !== null && solPublicKeys !== null) {
         try {
           let encryptedMnemonic = '';
           if (mnemonic.length > 0) {
@@ -89,10 +110,11 @@ export default function Wallet() {
       }
     };
     
-    if (user && !loading) {
+    if (user && !authLoading && mnemonic !== null && ethAddresses !== null && solPublicKeys !== null) {
       saveWalletData();
     }
-  }, [mnemonic, ethAddresses, solPublicKeys, ethCurrentIndex, solCurrentIndex, selectedChain, user, loading]);
+    console.log("saveWalletData useEffect dependencies updated.");
+  }, [mnemonic, ethAddresses, solPublicKeys, ethCurrentIndex, solCurrentIndex, selectedChain, user, authLoading]);
 
   async function displayMn() {
     try {
@@ -100,8 +122,7 @@ export default function Wallet() {
       const words = mn.split(" ");
       setMnemonic(words);
 
-      // Explicitly save mnemonic to Firestore immediately after generation
-      if (user && user.uid && !loading) {
+      if (user && user.uid && !authLoading) {
         const encryptedMnemonic = CryptoJS.AES.encrypt(JSON.stringify(words), user.uid).toString();
         await setDoc(doc(db, "userWallets", user.uid), { encryptedMnemonic: encryptedMnemonic }, { merge: true });
         console.log("Mnemonic saved to Firestore immediately after generation.");
@@ -166,79 +187,85 @@ export default function Wallet() {
           Generate keys from seed phrase and manage your crypto assets
         </p>
 
-        {mnemonic.length === 0 && (
-          <button
-            className="block mx-auto mt-12 px-6 py-3 bg-white text-black rounded-2xl hover:bg-black hover:text-white hover:border-2 hover:border-white transition-all"
-            onClick={displayMn}
-          >
-            Create Seed Phrase
-          </button>
-        )}
-
-        {mnemonic.length > 0 && (
+        {walletLoading ? (
+          <p className="text-center text-lg mt-12">Loading wallet data...</p>
+        ) : (
           <>
-            <div className="max-w-md mx-auto mt-10 bg-gray-900/50 backdrop-blur-md p-6 rounded-xl border border-gray-700 shadow-lg">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-semibold">Seed Phrase</h3>
-                <button 
-                  onClick={() => setIsMnemonicVisible(!isMnemonicVisible)} 
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  {isMnemonicVisible ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
-              </div>
-              <div className="grid grid-cols-3 gap-3 text-sm">
-                {mnemonic.map((word, index) => (
-                  <div key={index} className="px-2 py-1 bg-gray-800/50 rounded-md text-center border border-gray-700">
-                    {index + 1}. {isMnemonicVisible ? word.toUpperCase() : '********'}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="text-center mt-6">
+            {(mnemonic === null || mnemonic.length === 0) && (
               <button
-                className="px-5 py-2 bg-red-600/90 hover:bg-red-700 text-white rounded-md transition-colors flex items-center gap-2 mx-auto"
-                onClick={deleteMnemonic}
+                className="block mx-auto mt-12 px-6 py-3 bg-white text-black rounded-2xl hover:bg-black hover:text-white hover:border-2 hover:border-white transition-all"
+                onClick={displayMn}
               >
-                <Trash2 size={18} /> Delete Seed Phrase
+                Create Seed Phrase
               </button>
-            </div>
+            )}
 
-            <div className="text-center mt-8">
-              <select
-                onChange={(e) => setSelectedChain(e.target.value)}
-                value={selectedChain}
-                className="px-4 py-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-              >
-                <option value="" disabled>Select a Chain</option>
-                <option value="eth">Ethereum</option>
-                <option value="sol">Solana</option>
-              </select>
-            </div>
+            {mnemonic !== null && mnemonic.length > 0 && (
+              <>
+                <div className="max-w-md mx-auto mt-10 bg-gray-900/50 backdrop-blur-md p-6 rounded-xl border border-gray-700 shadow-lg">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-xl font-semibold">Seed Phrase</h3>
+                    <button 
+                      onClick={() => setIsMnemonicVisible(!isMnemonicVisible)} 
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      {isMnemonicVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3 text-sm">
+                    {mnemonic.map((word, index) => (
+                      <div key={index} className="px-2 py-1 bg-gray-800/50 rounded-md text-center border border-gray-700">
+                        {index + 1}. {isMnemonicVisible ? word.toUpperCase() : '********'}
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-            <div className="mt-8 max-h-[60vh] overflow-y-auto px-4">
-              {selectedChain === 'sol' && (
-                <SolanaWallet
-                  mnemonic={mnemonic.join(" ")}
-                  publicKeys={solPublicKeys}
-                  setPublicKeys={setSolPublicKeys}
-                  currentIndex={solCurrentIndex}
-                  setCurrentIndex={setSolCurrentIndex}
-                  onDeleteKey={deleteSolPublicKey}
-                />
-              )}
-              {selectedChain === 'eth' && (
-                <EthWallet
-                  mnemonic={mnemonic.join(" ")}
-                  addresses={ethAddresses}
-                  setAddresses={setEthAddresses}
-                  currentIndex={ethCurrentIndex}
-                  setCurrentIndex={setEthCurrentIndex}
-                  onDeleteKey={deleteEthAddress}
-                />
-              )}
-            </div>
+                <div className="text-center mt-6">
+                  <button
+                    className="px-5 py-2 bg-red-600/90 hover:bg-red-700 text-white rounded-md transition-colors flex items-center gap-2 mx-auto"
+                    onClick={deleteMnemonic}
+                  >
+                    <Trash2 size={18} /> Delete Seed Phrase
+                  </button>
+                </div>
+
+                <div className="text-center mt-8">
+                  <select
+                    onChange={(e) => setSelectedChain(e.target.value)}
+                    value={selectedChain}
+                    className="px-4 py-2 bg-gray-800/50 backdrop-blur-sm border border-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="" disabled>Select a Chain</option>
+                    <option value="eth">Ethereum</option>
+                    <option value="sol">Solana</option>
+                  </select>
+                </div>
+
+                <div className="mt-8 max-h-[60vh] overflow-y-auto px-4">
+                  {selectedChain === 'sol' && solPublicKeys !== null && (
+                    <SolanaWallet
+                      mnemonic={mnemonic.join(" ")}
+                      publicKeys={solPublicKeys}
+                      setPublicKeys={setSolPublicKeys}
+                      currentIndex={solCurrentIndex}
+                      setCurrentIndex={setSolCurrentIndex}
+                      onDeleteKey={deleteSolPublicKey}
+                    />
+                  )}
+                  {selectedChain === 'eth' && ethAddresses !== null && (
+                    <EthWallet
+                      mnemonic={mnemonic.join(" ")}
+                      addresses={ethAddresses}
+                      setAddresses={setEthAddresses}
+                      currentIndex={ethCurrentIndex}
+                      setCurrentIndex={setEthCurrentIndex}
+                      onDeleteKey={deleteEthAddress}
+                    />
+                  )}
+                </div>
+              </>
+            )}
           </>
         )}
       </main>

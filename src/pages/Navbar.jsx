@@ -1,6 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useEffect, useRef } from 'react';
+import { UserCircle } from 'lucide-react';
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -12,15 +13,19 @@ export default function Navbar() {
             const scrollY = window.scrollY;
             const nav = navRef.current;
             
-            if (scrollY <= 0) {
-                // When scrolling past top (rubber band effect)
-                const stretchAmount = Math.abs(scrollY) * 0.3; // Adjust multiplier for stretch intensity
-                nav.style.transform = `translateY(${stretchAmount}px)`;
-                nav.style.backdropFilter = `blur(${8 - stretchAmount * 0.2}px)`; // Slightly reduce blur when stretched
-            } else {
-                // Normal scrolling
-                nav.style.transform = 'translateY(0)';
-                nav.style.backdropFilter = 'blur(8px)';
+            if (nav) {
+                if (scrollY <= 0) {
+                    // When scrolling past top (rubber band effect)
+                    const stretchAmount = Math.abs(scrollY) * 0.3; // Adjust multiplier for stretch intensity
+                    nav.style.transform = `translateY(${stretchAmount}px)`;
+                    // Ensure blur value is non-negative
+                    const blurAmount = Math.max(0, 8 - stretchAmount * 0.2); 
+                    nav.style.backdropFilter = `blur(${blurAmount}px)`;
+                } else {
+                    // Normal scrolling
+                    nav.style.transform = 'translateY(0)';
+                    nav.style.backdropFilter = 'blur(8px)';
+                }
             }
         };
 
@@ -55,16 +60,30 @@ export default function Navbar() {
                         <img className='h-8' src='/432516.webp'></img>
                     </a>
                     {isAuthenticated ? (
-                        <button 
-                            onClick={() => {
-                                if (window.confirm('Are you sure you want to log out?')) {
-                                    logout();
-                                }
-                            }} 
-                            className="px-4 py-2 text-lg font-medium text-purple-100 bg-white/5 rounded-lg hover:bg-white/10 hover:text-white transition-all duration-200 border border-white/10 hover:border-white/20"
-                        >
-                            Logout
-                        </button>
+                        <div className="flex items-center space-x-3">
+                            {user && user.photoURL ? (
+                                <>
+                                    {console.log("Rendering user photo. PhotoURL:", user.photoURL)}
+                                    <img 
+                                        src={user.photoURL} 
+                                        alt="User Profile" 
+                                        className="h-8 w-8 rounded-full border border-gray-700"
+                                    />
+                                </>
+                            ) : (
+                                <UserCircle size={32} className="text-gray-400" />
+                            )}
+                            <button 
+                                onClick={() => {
+                                    if (window.confirm('Are you sure you want to log out?')) {
+                                        logout();
+                                    }
+                                }} 
+                                className="px-4 py-2 text-lg font-medium text-purple-100 bg-white/5 rounded-lg hover:bg-white/10 hover:text-white transition-all duration-200 border border-white/10 hover:border-white/20"
+                            >
+                                Logout
+                            </button>
+                        </div>
                     ) : (
                         <button 
                             onClick={login} 
