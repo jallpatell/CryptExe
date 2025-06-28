@@ -10,6 +10,7 @@ import { QRCodeSVG } from "qrcode.react";
 import getCryptoIcon from '/public/payment-method.png';
 import sendCryptoIcon from '/public/transaction.png';
 import viewBalanceIcon from '/public/cash.png';
+import buyCryptoIcon from '/public/money.png';
 
 export default function SolanaWallet({ 
   mnemonic, 
@@ -204,6 +205,15 @@ export default function SolanaWallet({
                       <img src={viewBalanceIcon} alt="View Balance" className="h-8 w-8" />
                       <span className="text-xs mt-1">Balance</span>
                     </button>
+
+                    {/* Buy Crypto Icon */}
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); setActiveSubSection(currentActiveSubSection === 'buy' ? null : 'buy'); }}
+                      className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-700 transition-colors"
+                    >
+                      <img src={buyCryptoIcon} alt="Buy Crypto" className="h-8 w-8" />
+                      <span className="text-xs mt-1">Buy</span>
+                    </button>
                   </div>
 
                   {currentActiveSubSection === 'receive' && (
@@ -270,6 +280,14 @@ export default function SolanaWallet({
                       <p className="text-gray-500 text-sm">
                         {loadingBalances ? "Loading..." : `${balances[publicKey.toBase58()] || "0.0"} SOL`}
                       </p>
+                    </div>
+                  )}
+
+                  {currentActiveSubSection === 'buy' && (
+                    <div className="mt-6 p-4 bg-gray-700/50 rounded-md">
+                      <h4 className="text-lg font-semibold mb-3">Buy SOL</h4>
+                      <p className="text-gray-400 text-sm">Payment gateway integration coming soon...</p>
+                      {/* Placeholder for payment gateway widget */}
                     </div>
                   )}
                 </div>
