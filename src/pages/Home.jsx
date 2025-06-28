@@ -35,7 +35,7 @@ export default function CryptexLanding() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-10 justify-center items-center pt-8">
-            <Button size="lg" onClick={() => window.open("crypt-exe.vercel.app", "_blank")} className="bg-gradient-to-r from-[#4e11ab] to-[#4e11ab] hover:from-[#210748] hover:to-[#773bb3] text-lg px-8 py-4">
+            <Button size="lg" className="bg-gradient-to-r from-[#4e11ab] to-[#4e11ab] hover:from-[#210748] hover:to-[#773bb3] text-lg px-8 py-4">
               Get Started Free
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
