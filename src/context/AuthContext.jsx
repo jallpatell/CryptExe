@@ -18,9 +18,6 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
       console.log("AuthContext - Current User:", currentUser);
       console.log("AuthContext - User UID:", currentUser?.uid);
-      if (currentUser) {
-        navigate('/wallet');
-      }
     });
     return () => unsubscribe();
   }, [navigate]);

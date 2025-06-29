@@ -7,7 +7,7 @@ import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
 import AuthPage from './pages/Auth'
 import { Transaction } from 'ethers'
-import Transactions from './pages/Transations'
+import Transactions from './pages/Transactions'
 
 export default function App() {
   return (
