@@ -37,16 +37,16 @@ export default function Navbar() {
     return ( 
         <nav 
             ref={navRef}
-            className="fixed top-0 z-50 w-full transition-all duration-300 ease-out bg-gray-900/20 backdrop-blur-md border-b border-gray-800/50 hover:border-gray-800/50"
+            className="fixed mt-3 ml-10 w-350 rounded-3xl top-0 z-50 transition-all duration-300 ease-out bg-black/20 backdrop-blur-md hover:scale-102 border-gray-800/50"
             style={{ 
                 transform: 'translateY(0)',
                 backdropFilter: 'blur(8px)',
                 willChange: 'transform, backdrop-filter' // Optimize for performance
             }}
         >
-            <div className="flex items-center justify-between p-4 mx-auto max-w-7xl">
+            <div className="flex items-center justify-between p-3 mx-auto max-w-7xl">
                 <div className="flex items-center space-x-3">
-                    <img className='h-10 rounded-lg' src='/CRYPTeX (1).png' alt="CRYPTeX Logo" />
+                    <img className='h-15 rounded-lg' src='/CRYPTeX (1).png' alt="CRYPTeX Logo" />
 
                 </div> 
 
@@ -87,7 +87,7 @@ export default function Navbar() {
                     ) : (
                         <button 
                             onClick={login} 
-                            className="px-4 py-2 text-lg font-medium text-white bg-gradient-to-r from-purple-600/80 to-purple-800/80 rounded-lg hover:from-purple-600 hover:to-purple-800 transition-all duration-200 shadow-lg shadow-purple-500/10 hover:shadow-purple-500/20"
+                            className="px-3 py-2 text-lg font-medium text-white font-mono bg-blue-500 rounded-lg hover:bg-blue-400 transition-all duration-200 shadow-lg shadow-blue-500/10 hover:shadow-blue-500/20"
                         >
                             Login
                         </button>
