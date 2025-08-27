@@ -1,10 +1,10 @@
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
 import * as bip39 from 'bip39';
 import SolanaWallet from "./Solanawallet";
 import EthWallet from "./EthWallet";
 import { Eye, EyeOff, Trash2 } from "lucide-react";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 import { useAuth } from '../context/AuthContext';
 import { db } from '../lib/firebase';
 import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
@@ -175,18 +175,19 @@ export default function Wallet() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col text-white">
+    <div className="min-h-screen bg-[#121515] flex flex-col text-white">
       <Navbar />
 
       <main className="flex-grow pt-28 px-4 pb-10">
-        <h1 className="text-5xl font-extrabold text-center bg-gradient-to-r from-[#4e11ab] to-[#431e5e] bg-clip-text text-transparent">
+        <h1 className="text-7xl font-light text-center bg-blue-500 bg-clip-text text-transparent">
           Manage Wallet
+          <p className="text-gray-300 font-mono mt-6 text-xl text-center max-w-2xl mx-auto">
+            Generate keys from seed phrase and manage your crypto assets
+          </p>
         </h1>
-
-        <p className="text-gray-300 mt-6 text-xl text-center max-w-2xl mx-auto">
-          Generate keys from seed phrase and manage your crypto assets
-        </p>
-
+        
+        <div>
+        </div>
         {walletLoading ? (
           <p className="text-center text-lg mt-12">Loading wallet data...</p>
         ) : (
@@ -202,24 +203,7 @@ export default function Wallet() {
 
             {mnemonic !== null && mnemonic.length > 0 && (
               <>
-                <div className="max-w-md mx-auto mt-10 bg-gray-900/50 backdrop-blur-md p-6 rounded-xl border border-gray-700 shadow-lg">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-xl font-semibold">Seed Phrase</h3>
-                    <button 
-                      onClick={() => setIsMnemonicVisible(!isMnemonicVisible)} 
-                      className="text-gray-400 hover:text-white transition-colors"
-                    >
-                      {isMnemonicVisible ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-3 gap-3 text-sm">
-                    {mnemonic.map((word, index) => (
-                      <div key={index} className="px-2 py-1 bg-gray-800/50 rounded-md text-center border border-gray-700">
-                        {index + 1}. {isMnemonicVisible ? word.toUpperCase() : '********'}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                
 
                 <div className="text-center mt-6">
                   <button

@@ -5,8 +5,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../lib/firebase';
 import { doc, getDoc } from "firebase/firestore";
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 // Register ChartJS components
 ChartJS.register(ArcElement, Tooltip, Legend);

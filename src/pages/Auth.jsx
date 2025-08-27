@@ -3,7 +3,7 @@ import { Chrome, Lock, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../lib/firebase';
-import Navbar from './Navbar';
+import Navbar from '../components/Navbar';
 
 export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false);

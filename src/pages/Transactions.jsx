@@ -3,8 +3,8 @@ import { ChevronDown, ArrowDown, ArrowUp, Clock, Hash, Wallet, HardDrive } from 
 import { useAuth } from '../context/AuthContext';
 import { db } from '../lib/firebase';
 import { doc, getDoc } from "firebase/firestore";
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export default function Transactions() {
   const { user } = useAuth();

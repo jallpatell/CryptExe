@@ -4,64 +4,38 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Shield, Zap, Globe, Lock, Smartphone, ArrowRight, Check, Star, Users, TrendingUp } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import LottieAnimation from '@/components/ui/Lottie';
 
-
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export default function CryptexLanding() {
   const { login } = useAuth();
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-y-auto overflow-x-hidden">
-      {/* Navigation */}
+    <div className="min-h-screen flex flex-col justify-between bg-[#121515] text-white overflow-y-auto overflow-x-hidden">
         <Navbar />
-      {/* Hero Section */}
-      <section className="flex-grow max-w-7xl mx-auto px-6 py-20 pt-[80px]">
-        <div className="text-center space-y-20">
-          
-          
-          <h1 className="text-5xl mt-30 md:text-7xl font-bold bg-gradient-to-r from-[#4e11ab] via-[#4e11ab] to-[#4e11ab] bg-clip-text text-transparent leading-tight transition duration-300 ease-in-out hover:brightness-130">
-              Your Gateway to the<br />
-              <span className="bg-gradient-to-r from-[#4e11ab] via-[#4e11ab] to-[#4e11ab] bg-clip-text text-transparent transition duration-300 ease-in-out hover:brightness-100">
-                Decentralized Web
-              </span>
+        <section className="flex flex-col md:flex-row max-w-7xl mx-auto px-6 py-20 pt-[80px] items-center gap-10">
+        <div className="flex-1 md:basis-[80%] mt-25 text-center md:text-left space-y-8">
+          <h1 className="text-5xl font-sans md:text-7xl font-extralight bg-gradient-to-r from-blue-500 via-blue-300   to-blue-500 bg-clip-text text-transparent leading-tight">
+              Gateway to <br />
+            <span className="bg-gradient-to-r font-light from-blue-500 via-blue-300 to-blue-500 bg-clip-text text-transparent">
+              The Decentralized Web
+            </span>
           </h1>
-
-          <Badge variant="secondary" className="bg-purple-900/50 text-purple-300 border-#8f4ff0 font-bold px-3 py-1.5">
-            🚀 Now Supporting Ethereum & Solana
+          <Badge variant="secondary" className="bg-blue-900/50 text-blue-300 border-blue-950 border-1 font-medium px-3 py-1.5">
+            🚀 Supporting Ethereum & Solana
           </Badge>
-          
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl font-extralight font-mono md:text-2xl text-gray-300 max-w-3xl leading-relaxed">
             Effortlessly manage your Ethereum and Solana assets in one sleek, non-custodial wallet. 
             Fast, secure, and designed for the future of DeFi.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-10 justify-center items-center pt-8">
-            <Button size="lg" onClick={login} className="bg-gradient-to-r from-[#4e11ab] to-[#4e11ab] hover:from-[#210748] hover:to-[#773bb3] text-lg px-8 py-4">
-              Get Started Free
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button size="lg"  onClick={() => window.open("https://www.coinbase.com/en-in/learn/crypto-basics/what-is-a-crypto-wallet", "_blank")} variant="outline" className="border-purple-400 text-0.5xl font-bold text-[#6920a6] bg-[#210748] hover:bg-white hover:text-[#210748] px-8 py-4">
-              Learn More about crypto wallets
-            </Button>
           </div>
-          
-          <div className="flex items-center justify-center space-x-8 pt-8 text-sm text-gray-400">
-            <div className="flex items-center space-x-2">
-              <Users className="h-4 w-4" />
-              <span className='font-extrabold'>1K+ Users</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <TrendingUp className="h-4 w-4" />
-              <span className='font-extrabold'>$0 Secured</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <span className='font-extrabold'>4.81/5 Rating</span>
-            </div>
+          <div className="flex-1 ml-10 mt-30 md:basis-[10%] flex justify-center">
+            <LottieAnimation />
           </div>
-        </div>
-      </section>
+        </section>
+
+
 
       {/* Features Grid */}
       <section className="max-w-7xl mx-auto px-6 py-20">
@@ -71,8 +45,6 @@ export default function CryptexLanding() {
             Built for power users and beginners alike, with enterprise-grade security and consumer-friendly design.
           </p>
         </div>
-
-
         <div className="grid grid-cols-3 gap-6">
   {/* Row 1 */}
   <Card className="bg-gray-900/50 border-gray-800/50 hover:border-white-600/50 transition-all duration-300 hover:scale-105 h-full">
