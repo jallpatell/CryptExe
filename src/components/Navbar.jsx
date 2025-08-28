@@ -1,10 +1,11 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useEffect, useRef } from 'react';
 import { UserCircle } from 'lucide-react';
 
 export default function Navbar() {
     const navigate = useNavigate();
+    const location = useLocation();
     const { isAuthenticated, login, logout, user } = useAuth();
     const navRef = useRef(null);
 
@@ -15,14 +16,11 @@ export default function Navbar() {
             
             if (nav) {
                 if (scrollY <= 0) {
-                    // When scrolling past top (rubber band effect)
-                    const stretchAmount = Math.abs(scrollY) * 0.3; // Adjust multiplier for stretch intensity
+                    const stretchAmount = Math.abs(scrollY) * 0.3;
                     nav.style.transform = `translateY(${stretchAmount}px)`;
-                    // Ensure blur value is non-negative
                     const blurAmount = Math.max(0, 8 - stretchAmount * 0.2); 
                     nav.style.backdropFilter = `blur(${blurAmount}px)`;
                 } else {
-                    // Normal scrolling
                     nav.style.transform = 'translateY(0)';
                     nav.style.backdropFilter = 'blur(8px)';
                 }
@@ -33,6 +31,10 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const baseLink = "text-lg font-medium transition-colors duration-200 px-3 py-2 rounded-lg";
+    const inactive = "text-gray-300/90 hover:text-white hover:bg-white/5";
+    const active = "text-white bg-white/10 border border-white/10";
+    const isActive = (path) => (location.pathname === path);
     
     return ( 
         <nav 
@@ -41,7 +43,7 @@ export default function Navbar() {
             style={{ 
                 transform: 'translateY(0)',
                 backdropFilter: 'blur(8px)',
-                willChange: 'transform, backdrop-filter' // Optimize for performance
+                willChange: 'transform, backdrop-filter'
             }}
         >
             <div className="flex items-center justify-between p-3 mx-auto max-w-7xl">
@@ -51,10 +53,10 @@ export default function Navbar() {
                 </div> 
 
                 <div className="hidden md:flex items-center space-x-6">
-                    <Link to="/" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Home</Link>
-                    <Link to="/wallet" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Wallet</Link>
-                    <Link to="/portfolio" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Portfolio</Link>
-                    <Link to="/transactions" className="hover:text-white text-gray-300/90 text-lg font-medium transition-colors duration-200 hover:bg-white/5 px-3 py-2 rounded-lg">Transactions</Link>
+                    <Link to="/" className={`${baseLink} ${isActive('/') ? active : inactive}`}>Home</Link>
+                    <Link to="/wallet" className={`${baseLink} ${isActive('/wallet') ? active : inactive}`}>Wallet</Link>
+                    <Link to="/portfolio" className={`${baseLink} ${isActive('/portfolio') ? active : inactive}`}>Portfolio</Link>
+                    <Link to="/transactions" className={`${baseLink} ${isActive('/transactions') ? active : inactive}`}>Transactions</Link>
 
                     <a href='https://github.com/jallpatell/CRYPTeX-secondary-' target='_blank' rel='noopener noreferrer' className="p-2 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300">
                         <img className='h-8' src='/432516.webp'></img>
@@ -79,7 +81,7 @@ export default function Navbar() {
                                         logout();
                                     }
                                 }} 
-                                className="px-4 py-2 text-lg font-medium text-purple-100 bg-white/5 rounded-lg hover:bg-white/10 hover:text-white transition-all duration-200 border border-white/10 hover:border-white/20"
+                                className="px-3 py-2 text-lg font-medium text-purple-100 bg-white/5 rounded-lg hover:bg-white/10 hover:text-white transition-all duration-200 border border-white/10 hover:border-white/20"
                             >
                                 Logout
                             </button>

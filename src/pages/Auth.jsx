@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Chrome, Lock, Shield } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../lib/firebase';
 import Navbar from '../components/Navbar';
@@ -8,12 +8,14 @@ import Navbar from '../components/Navbar';
 export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleGoogleAuth = async () => {
     setIsLoading(true);
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate('/wallet');
+      const redirectTo = location.state?.from?.pathname || '/wallet';
+      navigate(redirectTo, { replace: true });
     } catch (error) {
       console.error('Google authentication error:', error);
       alert(error.message);
