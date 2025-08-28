@@ -108,24 +108,6 @@ export default function EthWallet({
 
   return (
     <div className="max-w-2xl mx-auto">
-      <button 
-        className="block mx-auto px-6 py-3 bg-white/90 hover:bg-white text-black rounded-2xl hover:scale-102 transition-all shadow-lg"
-        onClick={async function() {
-          try {
-            const seed = await mnemonicToSeed(mnemonic);
-            const derivationPath = `m/44'/60'/${currentIndex}'/0'`;
-            const hdNode = HDNodeWallet.fromSeed(seed);
-            const child = hdNode.derivePath(derivationPath);
-            const wallet = new Wallet(child.privateKey);
-            setCurrentIndex(currentIndex + 1);
-            setAddresses([...addresses, wallet.address]);
-          } catch (error) {
-            console.error("Error adding Ethereum wallet:", error);
-          }
-        }}
-      >
-        Add ETH Wallet
-      </button>
 
       <div className="mt-8 space-y-4">
         {addresses && addresses.length > 0 ? (
@@ -175,7 +157,7 @@ export default function EthWallet({
                       onClick={(e) => { e.stopPropagation(); setActiveSubSection(currentActiveSubSection === 'receive' ? null : 'receive'); }}
                       className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-700 transition-colors"
                     >
-                      <img src={getCryptoIcon} alt="Get Crypto" className="h-8 w-8" />
+                      <img src={getCryptoIcon} alt="Get Crypto" className="h-8 invert w-8" />
                       <span className="text-xs mt-1">Receive</span>
                     </button>
 
@@ -184,7 +166,7 @@ export default function EthWallet({
                       onClick={(e) => { e.stopPropagation(); setActiveSubSection(currentActiveSubSection === 'send' ? null : 'send'); }}
                       className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-700 transition-colors"
                     >
-                      <img src={sendCryptoIcon} alt="Send Crypto" className="h-8 w-8" />
+                      <img src={sendCryptoIcon} alt="Send Crypto" className="h-8 invert w-8" />
                       <span className="text-xs mt-1">Send</span>
                     </button>
 
@@ -193,7 +175,7 @@ export default function EthWallet({
                       onClick={(e) => { e.stopPropagation(); setActiveSubSection(currentActiveSubSection === 'balance' ? null : 'balance'); }}
                       className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-700 transition-colors"
                     >
-                      <img src={viewBalanceIcon} alt="View Balance" className="h-8 bg-white w-8" />
+                      <img src={viewBalanceIcon} alt="View Balance" className="h-8 invert rounded-sm w-8" />
                       <span className="text-xs mt-1">Balance</span>
                     </button>
 
@@ -202,14 +184,14 @@ export default function EthWallet({
                       onClick={(e) => { e.stopPropagation(); setActiveSubSection(currentActiveSubSection === 'buy' ? null : 'buy'); }}
                       className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-700 transition-colors"
                     >
-                      <img src={buyCryptoIcon} alt="Buy Crypto" className="h-8 w-8" />
+                      <img src={buyCryptoIcon} alt="Buy Crypto" className="h-8 invert w-8" />
                       <span className="text-xs mt-1">Buy</span>
                     </button>
                   </div>
 
                   {currentActiveSubSection === 'receive' && (
-                    <div className="text-center bg-gray-700/50 p-4 rounded-md">
-                      <p className="text-sm text-gray-400 mb-2">Scan QR to receive ETH</p>
+                    <div className="text-center bg-white p-4 rounded-md">
+                      <p className="text-sm text-black font-mono font-extrabold mb-2">Scan QR to receive ETH</p>
                       <div className="flex justify-center">
                         <QRCodeSVG
                           value={address}
@@ -226,22 +208,22 @@ export default function EthWallet({
                   {currentActiveSubSection === 'send' && (
                     <div className="space-y-3 p-4 bg-gray-700/50 rounded-md">
                       <div>
-                        <label htmlFor={`recipient-${index}`} className="block text-sm font-medium text-gray-400">Recipient Address</label>
+                        <label htmlFor={`recipient-${index}`} className="block text-sm font-mono font-medium text-gray-400">Recipient Address</label>
                         <input
                           type="text"
                           id={`recipient-${index}`}
-                          className="mt-1 block w-full px-3 py-2 bg-gray-600 border border-gray-500 rounded-md shadow-sm placeholder-gray-400 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                          className="mt-1 block w-full px-3 py-2 bg-gray-600 border border-blue-500 font-mono rounded-md shadow-sm placeholder-gray-400 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                           value={recipientAddress}
                           onChange={(e) => setRecipientAddress(e.target.value)}
                           placeholder="Enter recipient address (e.g., 0x...)"
                         />
                       </div>
                       <div>
-                        <label htmlFor={`amount-${index}`} className="block text-sm font-medium text-gray-400">Amount (ETH)</label>
+                        <label htmlFor={`amount-${index}`} className="block text-sm font-mono font-medium text-gray-400">Amount (ETH)</label>
                         <input
                           type="number"
                           id={`amount-${index}`}
-                          className="mt-1 block w-full px-3 py-2 bg-gray-600 border border-gray-500 rounded-md shadow-sm placeholder-gray-400 text-white focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                          className="mt-1 block w-full px-3 py-2 bg-gray-600 font-mono border border-gray-500 rounded-md shadow-sm placeholder-gray-400 text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                           value={sendAmount}
                           onChange={(e) => setSendAmount(e.target.value)}
                           placeholder="e.g., 0.01"
@@ -250,7 +232,7 @@ export default function EthWallet({
                       </div>
                       <button
                         onClick={(e) => { e.stopPropagation(); handleSendEth(); }}
-                        className="w-full px-4 py-2 text-lg font-medium text-white bg-gradient-to-r from-green-600/80 to-green-800/80 rounded-lg hover:from-green-600 hover:to-green-800 transition-all duration-200 shadow-lg shadow-green-500/10 hover:shadow-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full px-4 py-2 text-lg font-medium text-white bg-green-500/80 rounded-lg hover:from-green-400 hover:to-green-800 transition-all duration-200 shadow-lg shadow-green-500/10 hover:shadow-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
                         disabled={isSending || !addresses || addresses.length === 0}
                       >
                         {isSending ? "Sending..." : "Send ETH"}

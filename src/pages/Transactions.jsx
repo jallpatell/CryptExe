@@ -95,6 +95,7 @@ export default function Transactions() {
           <h1 className="text-5xl font-light text-center bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent mb-8">
             Transaction History
           </h1>
+          <p className="text-gray-300 font-mono mt-6 text-sm text-center max-w-2xl mx-auto mb-1">( Simulation to-show until real transaction happens )</p>
           <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 mb-8">
             <div className="flex flex-col md:flex-row gap-4 items-center">
               <div className="flex-1 w-full">
@@ -105,7 +106,7 @@ export default function Transactions() {
                     setSelectedChain(e.target.value);
                     setSelectedKey('');
                   }}
-                  className="w-full bg-gray-800/30 border border-gray-600/50 rounded-lg py-2 pl-3 pr-8 appearance-none focus:outline-none focus:ring-1 focus:ring-purple-400 hover:border-gray-500 transition-colors text-sm"
+                  className="w-full bg-gray-800/30 border border-gray-600/50 rounded-lg py-2 pl-3 pr-8 appearance-none focus:outline-none focus:ring-1 focus:ring-blue-400 hover:border-gray-500 transition-colors text-sm"
                 >
                   <option value="">Select Chain</option>
                   <option value="eth">Ethereum</option>
@@ -118,7 +119,7 @@ export default function Transactions() {
                   value={selectedKey}
                   onChange={(e) => setSelectedKey(e.target.value)}
                   disabled={!selectedChain}
-                  className={`w-full bg-gray-800/30 border ${selectedChain ? 'border-gray-600/50 hover:border-gray-500' : 'border-gray-700/50 cursor-not-allowed'} rounded-lg py-2 pl-3 pr-8 appearance-none focus:outline-none focus:ring-1 focus:ring-purple-400 transition-colors text-sm`}
+                  className={`w-full bg-gray-800/30 border ${selectedChain ? 'border-gray-600/50 hover:border-gray-500' : 'border-gray-700/50 cursor-not-allowed'} rounded-lg py-2 pl-3 pr-8 appearance-none focus:outline-none focus:ring-1 focus:ring-blue-400 transition-colors text-sm`}
                 >
                   <option value="">Select Wallet</option>
                   {selectedChain === 'eth' && walletData.ethAddresses.map((address) => (

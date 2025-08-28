@@ -153,8 +153,8 @@ export default function Portfolio() {
         <h1 className="text-5xl font-light text-center bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
           Portfolio Overview
         </h1>
+        <p className="text-gray-300 font-mono mt-6 text-sm text-center max-w-2xl mx-auto mb-1">( Simulation to-show until real portfolio created )</p>
         <p className="text-gray-300 font-mono mt-6 text-xl text-center max-w-2xl mx-auto mb-10">Track your assets across all protocols</p>
-
         {/* Chain and Key Selection - Now more natural and transparent */}
         <div className="flex flex-col sm:flex-row gap-3 mb-8">
           <div className="relative flex-1">

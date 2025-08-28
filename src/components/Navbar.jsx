@@ -39,7 +39,7 @@ export default function Navbar() {
     return ( 
         <nav 
             ref={navRef}
-            className="fixed mt-3 ml-10 w-350 rounded-3xl top-0 z-50 transition-all duration-300 ease-out bg-black/20 backdrop-blur-md hover:scale-102 border-gray-800/50"
+            className="fixed mt-3 ml-10 w-350 rounded-3xl top-0 z-50 transition-all duration-300 ease-out bg-black/40 backdrop-blur-md hover:scale-102 border-gray-800/50"
             style={{ 
                 transform: 'translateY(0)',
                 backdropFilter: 'blur(8px)',
