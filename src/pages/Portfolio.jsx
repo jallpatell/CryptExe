@@ -147,56 +147,60 @@ export default function Portfolio() {
     : [];
 
   return (
-    <div className="min-h-screen bg-[#121515] text-white p-6">
+    <div className="min-h-screen bg-[#121515] flex flex-col text-white">
       <Navbar />
-      <main className="flex-grow pt-28 px-4 pb-10">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-5xl font-light text-center bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent mb-8">
-            Portfolio Overview
-          </h1>
-          <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 mb-8">
-            <div className="flex flex-col md:flex-row gap-4 items-center">
-              <div className="flex-1 w-full">
-                <label className="block text-sm text-gray-400 mb-1">Select Chain</label>
-                <select
-                  value={selectedChain}
-                  onChange={(e) => {
-                    setSelectedChain(e.target.value);
-                    setSelectedKey('');
-                  }}
-                  className="w-full bg-gray-800/30 border border-gray-600/50 rounded-lg py-2 pl-3 pr-8 appearance-none focus:outline-none focus:ring-1 focus:ring-purple-400 hover:border-gray-500 transition-colors text-sm"
-                >
-                  <option value="">Select Chain</option>
-                  <option value="eth">Ethereum</option>
-                  <option value="sol">Solana</option>
-                </select>
-              </div>
-              <div className="flex-1 w-full">
-                <label className="block text-sm text-gray-400 mb-1">Select Wallet</label>
-                <select
-                  value={selectedKey}
-                  onChange={(e) => setSelectedKey(e.target.value)}
-                  disabled={!selectedChain}
-                  className={`w-full bg-gray-800/30 border ${selectedChain ? 'border-gray-600/50 hover:border-gray-500' : 'border-gray-700/50 cursor-not-allowed'} rounded-lg py-2 pl-3 pr-8 appearance-none focus:outline-none focus:ring-1 focus:ring-purple-400 transition-colors text-sm`}
-                >
-                  <option value="">Select Wallet</option>
-                  {selectedChain === 'eth' && walletData.ethAddresses.map((address) => (
-                    <option key={address} value={address}>{address.slice(0, 6)}...{address.slice(-4)}</option>
-                  ))}
-                  {selectedChain === 'sol' && walletData.solPublicKeys.map((pubKey) => (
-                    <option key={pubKey} value={pubKey}>{pubKey.slice(0, 6)}...{pubKey.slice(-4)}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
+      <div className="flex-grow pt-28 px-4 pb-10">
+        <h1 className="text-5xl font-light text-center bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
+          Portfolio Overview
+        </h1>
+        <p className="text-gray-300 font-mono mt-6 text-xl text-center max-w-2xl mx-auto mb-10">Track your assets across all protocols</p>
+
+        {/* Chain and Key Selection - Now more natural and transparent */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-8">
+          <div className="relative flex-1">
+            <select
+              value={selectedChain}
+              onChange={(e) => {
+                setSelectedChain(e.target.value);
+                setSelectedKey('');
+              }}
+              className="w-full bg-gray-800/30 backdrop-blur-sm border border-gray-600/50 rounded-lg py-2 pl-3 pr-8 appearance-none focus:outline-none focus:ring-1 focus:ring-blue-400 hover:border-gray-500 transition-colors text-sm"
+            >
+              <option value="">Select Chain</option>
+              <option value="eth">Ethereum</option>
+              <option value="sol">Solana</option>
+            </select>
+            <ChevronDown className="absolute right-2 top-2.5 text-gray-400" size={16} />
           </div>
 
-          {portfolioData ? (
+          <div className="relative flex-1">
+            <select
+              value={selectedKey}
+              onChange={(e) => setSelectedKey(e.target.value)}
+              disabled={!selectedChain} 
+              className={`w-full bg-gray-800/30 backdrop-blur-sm border ${selectedChain ? 'border-gray-600/50 hover:border-gray-500' : 'border-gray-700/50 cursor-not-allowed'} rounded-lg py-2 pl-3 pr-8 appearance-none focus:outline-none focus:ring-1 focus:ring-blue-400 transition-colors text-sm`}
+            >
+              <option value="">Select Wallet</option>
+              {selectedChain === 'eth' && walletData.ethAddresses.map((address) => (
+                <option key={address} value={address}>{address.slice(0, 6)}...{address.slice(-4)}</option>
+              ))}
+              {selectedChain === 'sol' && walletData.solPublicKeys.map((pubKey) => (
+                <option key={pubKey} value={pubKey}>{pubKey.slice(0, 6)}...{pubKey.slice(-4)}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-2 top-2.5 text-gray-400" size={16} />
+          </div>
+        </div>
+
+        {/* Rest of the component remains the same */}
+        {portfolioData ? (
+          <>
+            {/* Networth and Protocol Allocation */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               {/* Networth Card */}
-              <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 hover:border-purple-500/50 transition-colors">
+              <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 hover:border-blue-500/50 transition-colors">
                 <div className="flex items-center mb-4">
-                  <Wallet className="text-purple-400 mr-2" />
+                  <Wallet className="text-blue-400 mr-2" />
                   <h3 className="text-xl font-semibold">Net Worth</h3>
                 </div>
                 <div className="text-4xl font-bold mb-2">
@@ -209,9 +213,9 @@ export default function Portfolio() {
               </div>
 
               {/* Protocol Allocation Card */}
-              <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 hover:border-purple-500/50 transition-colors">
+              <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 hover:border-blue-500/50 transition-colors">
                 <div className="flex items-center mb-4">
-                  <PieChart className="text-purple-400 mr-2" />
+                  <PieChart className="text-blue-400 mr-2" />
                   <h3 className="text-xl font-semibold">Protocol Allocation</h3>
                 </div>
                 <div className="h-64 relative">
@@ -232,21 +236,11 @@ export default function Portfolio() {
                 </div>
               </div>
             </div>
-          ) : (
-            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-12 text-center mb-8">
-              <div className="text-gray-400 mb-4">Select a chain and wallet to view portfolio</div>
-              <div className="text-blue-500 flex items-center justify-center">
-                <Wallet className="mr-2" />
-                No wallet selected
-              </div>
-            </div>
-          )}
 
-          {/* Protocol Breakdown Table */}
-          {portfolioData && (
-            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 hover:border-purple-500/50 transition-colors">
+            {/* Protocol Breakdown Table */}
+            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 hover:border-blue-500/50 transition-colors">
               <h3 className="text-xl font-semibold mb-4 flex items-center">
-                <HardDrive className="text-purple-400 mr-2" />
+                <HardDrive className="text-blue-400 mr-2" />
                 Protocol Breakdown
               </h3>
               <div className="overflow-x-auto">
@@ -254,23 +248,45 @@ export default function Portfolio() {
                   <thead>
                     <tr className="border-b border-gray-700 text-gray-400 text-left">
                       <th className="pb-3 pl-2">Name</th>
-                      <th className="pb-3">% Allocation</th>
+                      <th className="pb-3">Share</th>
+                      <th className="pb-3 pr-2 text-right">Value</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {protocolEntries.map(([name, percent]) => (
-                      <tr key={name} className="border-b border-gray-800 last:border-0">
-                        <td className="py-3 pl-2">{name}</td>
-                        <td className="py-3">{percent}%</td>
+                    {protocolEntries.map(([protocol, percent]) => (
+                      <tr key={protocol} className="border-b border-gray-800 hover:bg-gray-800/30 transition-colors">
+                        <td className="py-4 pl-2 font-medium">{protocol}</td>
+                        <td className="py-4">
+                          <div className="flex items-center">
+                            <div className="w-full bg-gray-700 rounded-full h-2.5 mr-3">
+                              <div 
+                                className="bg-blue-500 h-2.5 rounded-full" 
+                                style={{ width: `${percent}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-sm text-gray-400">{percent}%</span>
+                          </div>
+                        </td>
+                        <td className="py-4 pr-2 text-right">
+                          ${((portfolioData.networth * percent) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
             </div>
-          )}
-        </div>
-      </main>
+          </>
+        ) : (
+          <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-12 text-center">
+            <div className="text-gray-400 mb-4">Select a chain and wallet to view portfolio</div>
+            <div className="text-blue-400 flex items-center justify-center">
+              <Wallet className="mr-2" />
+              No wallet selected
+            </div>
+          </div>
+        )}
+      </div>
       <Footer />
     </div>
   );

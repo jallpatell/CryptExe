@@ -184,7 +184,7 @@ export default function Wallet() {
             <h1 className="text-5xl font-light text-left bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent mb-4">
               Manage Wallet
             </h1>
-            <p className="text-gray-300 mt-2 font-mono text-xl text-left max-w-2xl">
+            <p className="text-gray-300 mt-2 font-mono text-sm text-left max-w-2xl">
               Generate keys from seed phrase and manage your crypto assets
             </p>
             {walletLoading ? (
@@ -248,7 +248,7 @@ export default function Wallet() {
                     <option value="sol">Solana</option>
                   </select>
                   <button
-                    className="px-6 py-2 bg-white text-black rounded-2xl hover:bg-black hover:text-white hover:border-2 hover:border-white transition-all whitespace-nowrap"
+                    className="px-4 py-2 bg-blue-400 text-white rounded-md hover:bg-black hover:text-white transition-all whitespace-nowrap"
                     onClick={async () => {
                       if (selectedChain === 'eth') {
                         // Add Ethereum wallet

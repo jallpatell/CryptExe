@@ -117,24 +117,7 @@ export default function SolanaWallet({
 
   return (
     <div className="max-w-3xl mx-auto">
-      <button 
-        className="block mx-auto px-6 py-3 bg-white/90 hover:bg-white text-black rounded-2xl hover:scale-102 transition-all shadow-lg"
-        onClick={async function() {
-          try {
-            const seed = await mnemonicToSeed(mnemonic);
-            const path = `m/44'/501'/${currentIndex}'/0'`;
-            const derivedSeed = derivePath(path, seed.toString("hex")).key;
-            const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
-            const keypair = Keypair.fromSecretKey(secret);
-            setCurrentIndex(currentIndex + 1);
-            setPublicKeys([...publicKeys, keypair.publicKey]);
-          } catch (error) {
-            console.error("Error adding Solana wallet:", error);
-          }
-        }}
-      >
-        Add Solana Wallet
-      </button>
+      
 
       <div className="mt-8 space-y-4">
         {publicKeys && publicKeys.length > 0 ? (
@@ -152,7 +135,7 @@ export default function SolanaWallet({
           return (
             <div 
               key={publicKey.toBase58()} 
-              className="p-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-purple-500 transition-colors cursor-pointer"
+              className="p-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-blue-500 transition-colors cursor-pointer"
               onClick={() => {
                 toggleExpand(index);
                 setActiveSubSection(null); // Reset active sub-section when card is toggled

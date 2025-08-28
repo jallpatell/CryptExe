@@ -3,6 +3,7 @@ import { auth, googleProvider } from '../lib/firebase';
 import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 
 
+
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {

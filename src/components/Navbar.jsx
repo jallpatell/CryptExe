@@ -57,6 +57,7 @@ export default function Navbar() {
                     <Link to="/wallet" className={`${baseLink} ${isActive('/wallet') ? active : inactive}`}>Wallet</Link>
                     <Link to="/portfolio" className={`${baseLink} ${isActive('/portfolio') ? active : inactive}`}>Portfolio</Link>
                     <Link to="/transactions" className={`${baseLink} ${isActive('/transactions') ? active : inactive}`}>Transactions</Link>
+                    
 
                     <a href='https://github.com/jallpatell/CRYPTeX-secondary-' target='_blank' rel='noopener noreferrer' className="p-2 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300">
                         <img className='h-8' src='/432516.webp'></img>
