@@ -109,7 +109,7 @@ export default function EthWallet({
   return (
     <div className="max-w-2xl mx-auto">
       <button 
-        className="block mx-auto px-6 py-3 bg-white/90 hover:bg-white text-black rounded-2xl mt-10 hover:scale-105 transition-all shadow-lg"
+        className="block mx-auto px-6 py-3 bg-white/90 hover:bg-white text-black rounded-2xl hover:scale-102 transition-all shadow-lg"
         onClick={async function() {
           try {
             const seed = await mnemonicToSeed(mnemonic);
@@ -143,7 +143,7 @@ export default function EthWallet({
           return (
             <div 
               key={index} 
-              className="p-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-purple-500 transition-colors cursor-pointer"
+              className="p-4 bg-blue-800/50 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-blue-500 transition-colors cursor-pointer"
               onClick={() => {
                 toggleExpand(index);
                 setActiveSubSection(null); // Reset active sub-section when card is toggled
@@ -193,7 +193,7 @@ export default function EthWallet({
                       onClick={(e) => { e.stopPropagation(); setActiveSubSection(currentActiveSubSection === 'balance' ? null : 'balance'); }}
                       className="flex flex-col items-center p-2 rounded-lg hover:bg-gray-700 transition-colors"
                     >
-                      <img src={viewBalanceIcon} alt="View Balance" className="h-8 w-8" />
+                      <img src={viewBalanceIcon} alt="View Balance" className="h-8 bg-white w-8" />
                       <span className="text-xs mt-1">Balance</span>
                     </button>
 

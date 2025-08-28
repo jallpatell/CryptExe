@@ -23,16 +23,16 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col items-center justify-center px-4 text-white">
+    <div className="min-h-screen bg-[#121515] flex flex-col items-center justify-center px-4 text-white">
       <Navbar />
       <div className="flex-grow flex items-center justify-center w-full">
         <div className="w-full max-w-md">
           <div className="bg-gray-900/50 backdrop-blur-lg border border-gray-700 rounded-2xl p-8 shadow-xl text-center hover:shadow-2xl transition-shadow duration-300">
             <div className="mb-8">
-              <h1 className="text-5xl font-extrabold bg-gradient-to-r from-[#4e11ab] to-[#431e5e] bg-clip-text text-transparent mb-4">
+              <h1 className="text-5xl font-light font-mono bg-blue-500 bg-clip-text text-transparent mb-4">
                 CRYPTeX
               </h1>
-              <p className="text-gray-300 text-lg">
+              <p className="text-gray-300 font-mono text-lg">
                 Secure access to your multi-chain wallet
               </p>
             </div>
@@ -50,9 +50,8 @@ export default function AuthPage() {
                   </div>
                 ) : (
                   <>
-
-                    <img src="/google_logo.jpeg" className="h-[35px] w-auto rounded-lg" alt="Google logo" />
-                    <span> Authenticate with your Google Account</span>
+                    <img src="/google_logo.jpeg" className="h-[35px] w-auto ml-3 rounded-lg" alt="Google logo" />
+                    <span className='font-mono'> Authenticate with your Google Account</span>
                   </>
                 )}
             </button>
@@ -60,8 +59,8 @@ export default function AuthPage() {
 
           <div className="mt-6 p-4 bg-gray-800/40 border border-gray-700 rounded-xl backdrop-blur-sm text-sm text-gray-300 flex items-center justify-center space-x-2 hover:border-purple-500/50 transition-colors">
             <div className="flex items-center space-x-2">
-              <Shield className="h-4 w-4 text-purple-400" />
-              <span>End-to-end encrypted security</span>
+              <Shield className="h-4 w-4 text-blue-400" />
+              <span className='font-mono'>End-to-end encrypted security</span>
             </div>
           </div>
         </div>
