@@ -8,7 +8,7 @@ export default function Footer() {
                       <div className="p-2 border border-white/10 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300">
                           <img src='/CRYPTeX (1).png' className="h-8 rounded-lg" alt="CRYPTeX Logo" />
                       </div>
-                      <span className="text-lg font-bold bg-gradient-to-r from-purple-300 to-purple-400 bg-clip-text text-transparent">
+                      <span className="text-lg font-bold bg-gradient-to-r from-blue-300 to-blue-400 bg-clip-text text-transparent">
                           CRYPTeX
                       </span>
                   </div>

@@ -116,9 +116,9 @@ export default function SolanaWallet({
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-3xl mx-auto">
       <button 
-        className="block mx-auto px-6 py-3 bg-white/90 hover:bg-white text-black rounded-2xl mt-10 hover:scale-105 transition-all shadow-lg"
+        className="block mx-auto px-6 py-3 bg-white/90 hover:bg-white text-black rounded-2xl hover:scale-102 transition-all shadow-lg"
         onClick={async function() {
           try {
             const seed = await mnemonicToSeed(mnemonic);
