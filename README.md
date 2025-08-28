@@ -19,10 +19,10 @@ A modern, minimalistic crypto wallet — **built with React, Firebase, and Web3 
 ### 📸 Screenshots
 
 #### 💼 Portfolio Overview
-![Portfolio Overview](/public/portfolio-overview.png)
+
 
 #### 🔄 Transaction History
-![Transaction History](/public/transaction-history.png)
+
 
 ---
 
