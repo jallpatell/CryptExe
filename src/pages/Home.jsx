@@ -35,7 +35,7 @@ export default function CryptexLanding() {
           </div>
         </section>
 
-        <div className="font-mono flex font-extrabold text-blue-300 text-2xl ml-40">
+        <div className="font-mono flex mb-40 font-extrabold text-blue-300 text-2xl ml-40">
             <div>Login with Google....   </div>
             <div>Create seed phrase....   </div>
             <div>Select network....  </div>
