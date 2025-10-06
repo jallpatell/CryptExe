@@ -29,18 +29,14 @@ export default function CryptexLanding() {
             Effortlessly manage Ethereum and Solana assets in one sleek, non-custodial wallet.
             Fast, secure, and designed for <p className='font-extrabold'> The Future of DeFi.</p>
           </p>
+          <p className="text-xl font-extralight font-mono md:text-2xl text-gray-300 max-w-3xl leading-relaxed">
+            Connect to Devnet. Learn to Use Web3 wallet and connected portfolio using simul
+          </p>
           </div>
           <div className="flex-1 ml-10 mt-30 md:basis-[10%] flex justify-center">
             <LottieAnimation />
           </div>
         </section>
-
-        <div className="font-mono flex mb-40 font-extrabold text-blue-300 text-2xl ml-40">
-            <div>Login with Google....   </div>
-            <div>Create seed phrase....   </div>
-            <div>Select network....  </div>
-            <div>Start transacting....   </div>
-        </div>
 
   
       {/* Footer */}
